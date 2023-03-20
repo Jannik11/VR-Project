@@ -17,7 +17,7 @@ MonoBehaviour:
   m_control: -1
   m_fingerControlType: 3
   m_offsetPosition: {x: 0, y: 0, z: 0}
-  m_offsetRotation: {x: 40, y: 0, z: 0}
+  m_offsetRotation: {x: 69.9, y: 20.3, z: 57.1}
   m_originName: XRRig
   m_originScale: {x: 1, y: 1, z: 1}
   m_leftHandMapping:

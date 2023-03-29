@@ -22,11 +22,14 @@ public class Arrow : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.tag.Equals("String"))
+
+        if(collision.collider.CompareTag("String") || collision.collider.CompareTag("Quiver"))
         {
             return;
         }
-        Debug.Log(collision.collider);
+
+        transform.parent = null;
+
         Transform stickingArrowInstance = Instantiate(stickingArrow);
         stickingArrowInstance.forward = transform.forward;
         stickingArrowInstance.position = transform.position;
@@ -37,5 +40,6 @@ public class Arrow : MonoBehaviour
             stickingArrowInstance.transform.SetParent(collision.collider.attachedRigidbody.transform, true);
         }
         Destroy(gameObject);
+        
     }
 }

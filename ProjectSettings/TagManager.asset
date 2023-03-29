@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - String
+  - Quiver
+  - NockingArrow
+  - Hand
   layers:
   - Default
   - TransparentFX

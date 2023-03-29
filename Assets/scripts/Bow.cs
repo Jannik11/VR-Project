@@ -30,12 +30,14 @@ public class Bow : MonoBehaviour
     private float arrowSpeed = 1500.0f;
 
     public BowState BowState { get; private set; } = BowState.IDLE;
-
-// Start is called before the first frame update
-void Awake()
+    private void Awake()
     {
         instance = this;
+    }
 
+    // Start is called before the first frame update
+    void Start()
+    {
         lineRenderer = GetComponent<LineRenderer>();
 
         midDefaultOffset = mid.localPosition.x;
@@ -52,6 +54,7 @@ void Awake()
 
 
 
+
     // Update is called once per frame
     void Update()
     {
@@ -61,14 +64,15 @@ void Awake()
             mid.localPosition = new Vector3(Mathf.Clamp(mid.localPosition.x, midDefaultOffset, 60.0f), transform.position.y, transform.position.z);
             currentArrow?.transform.LookAt(forceTarget, Vector3.up);
 
-        } else
+        }
+        else
         {
             mid.localPosition = new Vector3(midDefaultOffset, transform.position.y, transform.position.z);
         }
 
         Vector3[] positions = new Vector3[] { top.position, mid.position, bot.position };
         lineRenderer.SetPositions(positions);
-        
+
 
     }
 
@@ -100,7 +104,7 @@ void Awake()
 
     private void GrabString(VG_HandStatus arg0)
     {
-        if(arg0.m_selectedObject.gameObject.tag.Equals("String"))
+        if (arg0.m_selectedObject.gameObject.tag.Equals("String"))
         {
             stringGrabbed = true;
             BowState = BowState.AIMING;

@@ -15,7 +15,7 @@ public class Quiver : MonoBehaviour {
 
     Transform newArrow;
 
-    void Awake()
+    void Start()
     {
         input = new();
         input.XRIRightHandInteraction.Enable();
@@ -23,15 +23,8 @@ public class Quiver : MonoBehaviour {
         input.XRIRightHandInteraction.Select.canceled += ReleaseArrow;
 
         EventSystem.current.OnArrowNock += DestroyArrow;
-
     }
 
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -59,5 +52,6 @@ public class Quiver : MonoBehaviour {
     private void DestroyArrow()
     {
         Destroy(newArrow.gameObject);
+        newArrow = null;
     }
 }

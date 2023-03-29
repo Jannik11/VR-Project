@@ -23,7 +23,7 @@ public class Bow : MonoBehaviour
 
     private GameObject currentArrow;
 
-    private float arrowSpeed = 1000.0f;
+    private float arrowSpeed = 1500.0f;
 
     // Start is called before the first frame update
     void Awake()
@@ -41,6 +41,11 @@ public class Bow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       // if(currentArrow == null)
+       // {
+       //     return;
+       // }
+
         if (stringGrabbed)
         {
             mid.localPosition = new Vector3(Mathf.Clamp(mid.localPosition.x, midDefaultOffset, 60.0f), transform.position.y, transform.position.z);
@@ -62,7 +67,6 @@ public class Bow : MonoBehaviour
         stringGrabbed = false;
 
         Vector3 forceVector = forceTarget.position - mid.position;
-        Debug.DrawLine(mid.position, forceTarget.position, Color.red, 20);
 
         currentArrow.transform.parent = null;
 
@@ -76,8 +80,8 @@ public class Bow : MonoBehaviour
         {
             stringGrabbed = true;
             currentArrow = Instantiate(arrow, mid.position, Quaternion.FromToRotation(mid.position, forceTarget.position), mid);
-            currentArrow.transform.LookAt(forceTarget, Vector3.up);
             rb = currentArrow.GetComponent<Rigidbody>();
+            currentArrow.transform.LookAt(forceTarget, Vector3.up);
         }
     }
 }

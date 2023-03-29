@@ -1912,7 +1912,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1273270245}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.433, z: 0.78}
+  m_LocalPosition: {x: 0.76, y: 0.23, z: 1.07}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2468,9 +2468,13 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5872897583710781726, guid: b7247e7945bce574bb7a5a1f39712409, type: 3}
+      propertyPath: m_TagString
+      value: String
+      objectReference: {fileID: 0}
     - target: {fileID: 7387918331735289468, guid: b7247e7945bce574bb7a5a1f39712409, type: 3}
       propertyPath: m_Name
-      value: SketchUpShadowflameBow (1)
+      value: bow
       objectReference: {fileID: 0}
     - target: {fileID: 7911971568712807622, guid: b7247e7945bce574bb7a5a1f39712409, type: 3}
       propertyPath: m_RootOrder
@@ -2650,4 +2654,4 @@ MonoBehaviour:
   mid: {fileID: 1991083037}
   bot: {fileID: 1711545643}
   forceTarget: {fileID: 2121551076}
-  arrow: {fileID: 758545896734763736, guid: 8f87a658b4864aa46bd0a8c5b9b77d2e, type: 3}
+  arrow: {fileID: 8945539131954115154, guid: 098032a119939764cbf7a9385ad75e3c, type: 3}

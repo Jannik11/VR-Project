@@ -6,6 +6,7 @@ public class Arrow : MonoBehaviour
 {
 
     Rigidbody rb;
+    [SerializeField] Transform stickingArrow;
 
     // Start is called before the first frame update
     void Start()
@@ -17,5 +18,24 @@ public class Arrow : MonoBehaviour
     void Update()
     {
         transform.LookAt(transform.position + rb.velocity, Vector3.up);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.collider.tag.Equals("String"))
+        {
+            return;
+        }
+        Debug.Log(collision.collider);
+        Transform stickingArrowInstance = Instantiate(stickingArrow);
+        stickingArrowInstance.forward = transform.forward;
+        stickingArrowInstance.position = transform.position;
+        stickingArrowInstance.localScale = transform.localScale;
+
+        if (collision.collider.attachedRigidbody != null)
+        {
+            stickingArrowInstance.transform.SetParent(collision.collider.attachedRigidbody.transform, true);
+        }
+        Destroy(gameObject);
     }
 }

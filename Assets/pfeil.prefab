@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 668914123406270338}
   - component: {fileID: 6894768150081516985}
+  - component: {fileID: 3887526878510931166}
   m_Layer: 0
   m_Name: pfeil
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 758545896734763736}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.099999994, y: 0.060000002, z: 0.060000002}
+  m_LocalScale: {x: -0.09999999, y: -0.06, z: -0.06}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2095786458790006735}
@@ -49,6 +50,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3887526878510931166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758545896734763736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a25fb31a26d664247908fb4d77868b62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1039535763269923119
 GameObject:
   m_ObjectHideFlags: 0

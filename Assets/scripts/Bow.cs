@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using VirtualGrasp;
 
-public class stringRenderer : MonoBehaviour
+public class Bow : MonoBehaviour
 {
     [SerializeField] private Transform top;
     [SerializeField] private Transform mid;
@@ -44,7 +44,8 @@ public class stringRenderer : MonoBehaviour
         if (stringGrabbed)
         {
             mid.localPosition = new Vector3(Mathf.Clamp(mid.localPosition.x, midDefaultOffset, 60.0f), transform.position.y, transform.position.z);
-            
+            currentArrow.transform.LookAt(forceTarget, Vector3.up);
+
         } else
         {
             mid.localPosition = new Vector3(midDefaultOffset, transform.position.y, transform.position.z);
@@ -52,7 +53,7 @@ public class stringRenderer : MonoBehaviour
 
         Vector3[] positions = new Vector3[] { top.position, mid.position, bot.position };
         lineRenderer.SetPositions(positions);
-        currentArrow.transform.LookAt(forceTarget, Vector3.up);
+        
 
     }
 
@@ -71,10 +72,12 @@ public class stringRenderer : MonoBehaviour
 
     private void GrabString(VG_HandStatus arg0)
     {
-        stringGrabbed = true;
-
-        currentArrow = Instantiate(arrow, mid.position, Quaternion.FromToRotation(mid.position, forceTarget.position), mid);
-        currentArrow.transform.LookAt(forceTarget, Vector3.up);
-        rb = currentArrow.GetComponent<Rigidbody>();
+        if(arg0.m_selectedObject.gameObject.tag.Equals("String"))
+        {
+            stringGrabbed = true;
+            currentArrow = Instantiate(arrow, mid.position, Quaternion.FromToRotation(mid.position, forceTarget.position), mid);
+            currentArrow.transform.LookAt(forceTarget, Vector3.up);
+            rb = currentArrow.GetComponent<Rigidbody>();
+        }
     }
 }

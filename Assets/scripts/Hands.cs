@@ -6,8 +6,8 @@ using UnityEngine;
 public class Hands : MonoBehaviour {
 
     public static Hands instance;
-    public static HandState Left { get; private set; } = HandState.NONE;
-    public static HandState Right { get; private set; } = HandState.NONE;
+    public HandState Left { get; private set; } = HandState.NONE;
+    public HandState Right { get; private set; } = HandState.NONE;
 
     private void Awake() {
         instance = this;
@@ -23,5 +23,9 @@ public class Hands : MonoBehaviour {
         } else if (side == Side.RIGHT) {
             Right = HandState.ARROW;
         }
+    }
+
+    public bool IsArrowInAnyHand() {
+        return Left == HandState.ARROW || Right == HandState.ARROW;
     }
 }

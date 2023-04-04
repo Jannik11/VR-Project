@@ -60,18 +60,20 @@ public class Bow : MonoBehaviour {
 
     private void ReleaseString(VG_HandStatus arg0) {
         if (arg0.m_selectedObject.CompareTag("String")) {
-            if (BowState == BowState.AIMING) {
-                stringGrabbed = false;
+            if (BowState == BowState.AIMING && Quiver.instance.CurrentArrow.ArrowState == ArrowState.INBOW) {
                 EventSystem.current.TriggerOnArrowShoot();
             }
+
+            stringGrabbed = false;
             BowState = BowState.IDLE;
         }
     }
 
     private void GrabString(VG_HandStatus arg0) {
         if (arg0.m_selectedObject.gameObject.CompareTag("String")) {
-            stringGrabbed = true;
+
             BowState = BowState.AIMING;
+            stringGrabbed = true;
         }
     }
 

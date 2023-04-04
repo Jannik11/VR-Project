@@ -43,14 +43,14 @@ public class Quiver : MonoBehaviour {
     }
 
     private void GrabArrowRight(InputAction.CallbackContext obj) {
-        if (rightHandEnteredQuiver && Hands.Right.Equals(HandState.NONE)) {
+        if (rightHandEnteredQuiver && Hands.instance.Right == HandState.NONE) {
             GrabArrow(rightHand);
             EventSystem.current.TriggerOnArrowGrab(Side.RIGHT);
         }
     }
 
     private void GrabArrowLeft(InputAction.CallbackContext obj) {
-        if (leftHandEnteredQuiver && Hands.Left.Equals(HandState.NONE)) {
+        if (leftHandEnteredQuiver && Hands.instance.Left == HandState.NONE) {
             GrabArrow(leftHand);
             EventSystem.current.TriggerOnArrowGrab(Side.LEFT);
         };
@@ -58,8 +58,8 @@ public class Quiver : MonoBehaviour {
     private void GrabArrow(Transform hand) {
         if (Bow.instance.BowState == BowState.IDLE) {
             Transform arrow = Instantiate(this.arrow, hand.position, hand.rotation);
-            Arrow arrow1 = arrow.GetComponent<Arrow>();
-            arrow1.Init(hand, bowString, aimTarget);
+            Arrow arrowScript = arrow.GetComponent<Arrow>();
+            arrowScript.Init(hand, bowString, aimTarget);
         }
     }
 }

@@ -50,10 +50,6 @@ public class Arrow : MonoBehaviour {
     }
 
     public void NockArrow() {
-        if (ArrowState != ArrowState.INHAND) {
-            return;
-        }
-
         ArrowState = ArrowState.INBOW;
 
         transform.position = bowString.position;
@@ -61,10 +57,6 @@ public class Arrow : MonoBehaviour {
     }
 
     public void ShootArrow() {
-        if (ArrowState != ArrowState.INBOW) {
-            return;
-        }
-
         ArrowState = ArrowState.FLYING;
 
         rb = gameObject.AddComponent<Rigidbody>();
@@ -97,24 +89,13 @@ public class Arrow : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision) {
 
-        if (collision.collider.CompareTag("Quiver")) {
+        if (collision.collider.CompareTag("Quiver") || collision.collider.CompareTag("String")) {
             return;
         }
-
-        switch (ArrowState) {
-            case ArrowState.FLYING:
-
-                if (!collision.collider.CompareTag("String")) {
-                    EventSystem.current.TriggerOnArrowHit(collision.collider);
-                }
-                break;
-
-            default:
-                break;
+        
+        if (ArrowState == ArrowState.FLYING) {
+            EventSystem.current.TriggerOnArrowHit(collision.collider);
         }
-
-
-
     }
 }
 

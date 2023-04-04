@@ -6,7 +6,7 @@ public class String : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Arrow") && Bow.instance.BowState == BowState.IDLE && Quiver.instance.CurrentArrow.ArrowState == ArrowState.INHAND) { 
+        if (other.CompareTag("Arrow") && Bow.instance.BowState == BowState.IDLE && Quiver.instance.CurrentArrow.ArrowState == ArrowState.INHAND && Hands.instance.IsArrowInAnyHand()) { 
             EventSystem.current.TriggerOnArrowNock();
         }
     }

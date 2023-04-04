@@ -8,36 +8,58 @@ using VirtualGrasp;
 public class Quiver : MonoBehaviour {
 
     [SerializeField] Transform arrow;
-    [SerializeField] Transform hand;
+    [SerializeField] Transform rightHand;
+    [SerializeField] Transform leftHand;
     [SerializeField] XRIDefaultInputActions input;
     [SerializeField] Transform aimTarget;
     [SerializeField] Transform bowString;
 
-    private bool enteredQuiver = false;
+    private bool leftHandEnteredQuiver = false;
+    private bool rightHandEnteredQuiver = false;
+
+    public static Quiver instance;
+    public Arrow CurrentArrow { get; private set; }
+
+    private void Awake() {
+        instance = this;
+    }
 
     void Start() {
         input = new();
         input.XRIRightHandInteraction.Enable();
-        input.XRIRightHandInteraction.Select.performed += GrabArrow;
-        input.XRIRightHandInteraction.Select.canceled += ReleaseArrow;
+        input.XRILeftHandInteraction.Enable();
+        input.XRIRightHandInteraction.Select.performed += GrabArrowRight;
+        input.XRILeftHandInteraction.Select.performed += GrabArrowLeft;
     }
 
 
     private void OnTriggerEnter(Collider other) {
-        enteredQuiver = true;
+        leftHandEnteredQuiver = other.CompareTag("leftHand");
+        rightHandEnteredQuiver = other.CompareTag("rightHand");
     }
     private void OnTriggerExit(Collider other) {
-        enteredQuiver = false;
+        leftHandEnteredQuiver = !other.CompareTag("leftHand");
+        rightHandEnteredQuiver = !other.CompareTag("rightHand");
     }
 
-    private void GrabArrow(InputAction.CallbackContext obj) {
-        if (enteredQuiver && Bow.instance.BowState == BowState.IDLE) {
-            Transform newArrow = Instantiate(arrow, hand.position, hand.rotation);
-            newArrow.GetComponent<Arrow>().Init(hand, bowString, aimTarget);
-            EventSystem.current.TriggerOnArrowTake();
+    private void GrabArrowRight(InputAction.CallbackContext obj) {
+        if (rightHandEnteredQuiver && Hands.Right.Equals(HandState.NONE)) {
+            GrabArrow(rightHand);
+            EventSystem.current.TriggerOnArrowGrab(Side.RIGHT);
         }
     }
-    private void ReleaseArrow(InputAction.CallbackContext obj) {
-        //Destroy(newArrow.gameObject);
+
+    private void GrabArrowLeft(InputAction.CallbackContext obj) {
+        if (leftHandEnteredQuiver && Hands.Left.Equals(HandState.NONE)) {
+            GrabArrow(leftHand);
+            EventSystem.current.TriggerOnArrowGrab(Side.LEFT);
+        };
+    }
+    private void GrabArrow(Transform hand) {
+        if (Bow.instance.BowState == BowState.IDLE) {
+            Transform arrow = Instantiate(this.arrow, hand.position, hand.rotation);
+            Arrow arrow1 = arrow.GetComponent<Arrow>();
+            arrow1.Init(hand, bowString, aimTarget);
+        }
     }
 }

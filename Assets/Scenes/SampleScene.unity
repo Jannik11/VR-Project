@@ -443,7 +443,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 0, z: 1}
 --- !u!114 &213423059
 MonoBehaviour:
@@ -458,7 +458,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arrow: {fileID: 3013303153778023664, guid: 098032a119939764cbf7a9385ad75e3c, type: 3}
-  hand: {fileID: 981731605}
+  rightHand: {fileID: 1963518082}
+  leftHand: {fileID: 534719263}
   aimTarget: {fileID: 1515539444}
   bowString: {fileID: 1991083037}
 --- !u!33 &213423060
@@ -1330,6 +1331,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &534719263 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8002521009313713320, guid: ab96e15c6e547954e888fafdf9b251f4, type: 3}
+  m_PrefabInstance: {fileID: 1528766657}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &551399640
 GameObject:
   m_ObjectHideFlags: 0
@@ -5386,7 +5392,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2463988830353577564, guid: ab96e15c6e547954e888fafdf9b251f4, type: 3}
       propertyPath: m_TagString
-      value: Hand
+      value: rightHand
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ab96e15c6e547954e888fafdf9b251f4, type: 3}
       propertyPath: m_Name
@@ -5394,7 +5400,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4032444441526723775, guid: ab96e15c6e547954e888fafdf9b251f4, type: 3}
       propertyPath: m_TagString
-      value: Hand
+      value: leftHand
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab96e15c6e547954e888fafdf9b251f4, type: 3}
@@ -6387,6 +6393,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1963518082 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3854723052032172530, guid: ab96e15c6e547954e888fafdf9b251f4, type: 3}
+  m_PrefabInstance: {fileID: 1528766657}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1991083036
 GameObject:
   m_ObjectHideFlags: 0

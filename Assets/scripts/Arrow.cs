@@ -13,7 +13,7 @@ public class Arrow : MonoBehaviour {
 
     private const float ARROWSPEED = 1500.0f;
 
-    public ArrowState ArrowState { get; private set; } = ArrowState.NOCKING;
+    public ArrowState ArrowState { get; private set; } = ArrowState.INHAND;
 
     public void Init(Transform hand, Transform bowString, Transform aimTarget) {
         this.hand = hand;
@@ -37,7 +37,7 @@ public class Arrow : MonoBehaviour {
     void Update() {
 
         switch (ArrowState) {
-            case ArrowState.AIMING:
+            case ArrowState.INBOW:
                 transform.LookAt(aimTarget.position, Vector3.up);
                 break;
             case ArrowState.FLYING:
@@ -50,18 +50,18 @@ public class Arrow : MonoBehaviour {
     }
 
     public void NockArrow() {
-        if (ArrowState != ArrowState.NOCKING) {
+        if (ArrowState != ArrowState.INHAND) {
             return;
         }
 
-        ArrowState = ArrowState.AIMING;
+        ArrowState = ArrowState.INBOW;
 
         transform.position = bowString.position;
         transform.SetParent(bowString, true);
     }
 
     public void ShootArrow() {
-        if (ArrowState != ArrowState.AIMING) {
+        if (ArrowState != ArrowState.INBOW) {
             return;
         }
 

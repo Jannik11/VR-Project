@@ -6,8 +6,10 @@ TagManager:
   tags:
   - String
   - Quiver
-  - NockingArrow
   - Hand
+  - Arrow
+  - leftHand
+  - rightHand
   layers:
   - Default
   - TransparentFX

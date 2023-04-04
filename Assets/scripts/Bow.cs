@@ -20,9 +20,6 @@ public class Bow : MonoBehaviour {
     private float midDefaultOffset;
     private bool stringGrabbed = false;
 
-    private GameObject currentArrow;
-
-
     public BowState BowState { get; private set; } = BowState.IDLE;
     private void Awake() {
         instance = this;
@@ -37,7 +34,6 @@ public class Bow : MonoBehaviour {
         VG_Controller.OnObjectFullyReleased.AddListener(ReleaseString);
         VG_Controller.OnObjectGrasped.AddListener(GrabString);
 
-        EventSystem.current.OnArrowTake += TakeArrow;
         EventSystem.current.OnArrowNock += NockArrow;
         EventSystem.current.OnArrowShoot += ShootArrow;
 
@@ -57,17 +53,19 @@ public class Bow : MonoBehaviour {
         Vector3[] positions = new Vector3[] { top.position, mid.position, bot.position };
         lineRenderer.SetPositions(positions);
 
-  
+
 
 
     }
 
     private void ReleaseString(VG_HandStatus arg0) {
-        if (BowState == BowState.AIMING) {
-            stringGrabbed = false;
-            EventSystem.current.TriggerOnArrowShoot();
+        if (arg0.m_selectedObject.CompareTag("String")) {
+            if (BowState == BowState.AIMING) {
+                stringGrabbed = false;
+                EventSystem.current.TriggerOnArrowShoot();
+            }
+            BowState = BowState.IDLE;
         }
-        BowState = BowState.IDLE;
     }
 
     private void GrabString(VG_HandStatus arg0) {
@@ -75,10 +73,6 @@ public class Bow : MonoBehaviour {
             stringGrabbed = true;
             BowState = BowState.AIMING;
         }
-    }
-
-    private void TakeArrow() {
-        BowState = BowState.NOCKING;
     }
 
     private void NockArrow() {

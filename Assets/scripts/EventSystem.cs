@@ -12,15 +12,6 @@ public class EventSystem : MonoBehaviour
         current = this;
     }
 
-    public event Action OnArrowTake;
-    public void TriggerOnArrowTake()
-    {
-        if (OnArrowTake != null)
-        {
-            OnArrowTake();
-        }
-    }
-
     public event Action OnArrowNock;
     public void TriggerOnArrowNock()
     {
@@ -45,6 +36,15 @@ public class EventSystem : MonoBehaviour
         if (OnArrowHit != null)
         {
             OnArrowHit(collider);
+        }
+    } 
+    
+    public event Action<Side> OnArrowGrab;
+    public void TriggerOnArrowGrab(Side side)
+    {
+        if (OnArrowGrab != null)
+        {
+            OnArrowGrab(side);
         }
     }
 

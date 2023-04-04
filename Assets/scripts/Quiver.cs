@@ -8,50 +8,36 @@ using VirtualGrasp;
 public class Quiver : MonoBehaviour {
 
     [SerializeField] Transform arrow;
-    [SerializeField] Transform rightHand;
+    [SerializeField] Transform hand;
     [SerializeField] XRIDefaultInputActions input;
+    [SerializeField] Transform aimTarget;
+    [SerializeField] Transform bowString;
 
     private bool enteredQuiver = false;
 
-    Transform newArrow;
-
-    void Start()
-    {
+    void Start() {
         input = new();
         input.XRIRightHandInteraction.Enable();
         input.XRIRightHandInteraction.Select.performed += GrabArrow;
         input.XRIRightHandInteraction.Select.canceled += ReleaseArrow;
-
-        EventSystem.current.OnArrowNock += DestroyArrow;
     }
 
 
-    private void OnTriggerEnter(Collider other)
-    {
+    private void OnTriggerEnter(Collider other) {
         enteredQuiver = true;
     }
-    private void OnTriggerExit(Collider other)
-    {
+    private void OnTriggerExit(Collider other) {
         enteredQuiver = false;
     }
 
-    private void GrabArrow(InputAction.CallbackContext obj)
-    {
-        if (enteredQuiver && Bow.instance.BowState == BowState.IDLE)
-        {
-            newArrow = Instantiate(arrow, rightHand.position, rightHand.rotation, rightHand);
-
+    private void GrabArrow(InputAction.CallbackContext obj) {
+        if (enteredQuiver && Bow.instance.BowState == BowState.IDLE) {
+            Transform newArrow = Instantiate(arrow, hand.position, hand.rotation);
+            newArrow.GetComponent<Arrow>().Init(hand, bowString, aimTarget);
             EventSystem.current.TriggerOnArrowTake();
         }
     }
-    private void ReleaseArrow(InputAction.CallbackContext obj)
-    {
+    private void ReleaseArrow(InputAction.CallbackContext obj) {
         //Destroy(newArrow.gameObject);
-    }
-
-    private void DestroyArrow()
-    {
-        Destroy(newArrow.gameObject);
-        newArrow = null;
     }
 }

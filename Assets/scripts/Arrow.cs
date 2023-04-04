@@ -2,44 +2,119 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arrow : MonoBehaviour
-{
+public class Arrow : MonoBehaviour {
 
-    Rigidbody rb;
-    [SerializeField] Transform stickingArrow;
+    private Rigidbody rb;
+    private Transform hand;
+    private Transform bowString;
+    private Transform aimTarget;
+
+    private Vector3 scale;
+
+    private const float ARROWSPEED = 1500.0f;
+
+    public ArrowState ArrowState { get; private set; } = ArrowState.NOCKING;
+
+    public void Init(Transform hand, Transform bowString, Transform aimTarget) {
+        this.hand = hand;
+        this.bowString = bowString;
+        this.aimTarget = aimTarget;
+
+        transform.SetParent(hand, true);
+    }
+
 
     // Start is called before the first frame update
-    void Start()
-    {
-        rb = GetComponent<Rigidbody>();
+    void Start() {
+        EventSystem.current.OnArrowNock += NockArrow;
+        EventSystem.current.OnArrowShoot += ShootArrow;
+        EventSystem.current.OnArrowHit += ArrowHit;
+
+        scale = transform.localScale;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        transform.LookAt(transform.position + rb.velocity, Vector3.up);
+    void Update() {
+
+        switch (ArrowState) {
+            case ArrowState.AIMING:
+                transform.LookAt(aimTarget.position, Vector3.up);
+                break;
+            case ArrowState.FLYING:
+                transform.LookAt(transform.position + rb.velocity, Vector3.up);
+                break;
+
+            default:
+                break;
+        }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-
-        if(collision.collider.CompareTag("String") || collision.collider.CompareTag("Quiver"))
-        {
+    public void NockArrow() {
+        if (ArrowState != ArrowState.NOCKING) {
             return;
         }
 
+        ArrowState = ArrowState.AIMING;
+
+        transform.position = bowString.position;
+        transform.SetParent(bowString, true);
+    }
+
+    public void ShootArrow() {
+        if (ArrowState != ArrowState.AIMING) {
+            return;
+        }
+
+        ArrowState = ArrowState.FLYING;
+
+        rb = gameObject.AddComponent<Rigidbody>();
+
+        rb.useGravity = true;
+        rb.isKinematic = false;
+        rb.detectCollisions = true;
+
         transform.parent = null;
 
-        Transform stickingArrowInstance = Instantiate(stickingArrow);
-        stickingArrowInstance.forward = transform.forward;
-        stickingArrowInstance.position = transform.position;
-        stickingArrowInstance.localScale = transform.localScale;
+        Vector3 forceVector = aimTarget.position - bowString.position;
+        rb.AddForce(forceVector * ARROWSPEED);
+    }
 
-        if (collision.collider.attachedRigidbody != null)
-        {
-            stickingArrowInstance.transform.SetParent(collision.collider.attachedRigidbody.transform, true);
+    public void ArrowHit(Collider collider) {
+        if (ArrowState != ArrowState.FLYING) {
+            return;
         }
-        Destroy(gameObject);
-        
+
+        ArrowState = ArrowState.STICKING;
+
+        rb.useGravity = false;
+        rb.isKinematic = true;
+        rb.detectCollisions = false;
+
+        if (collider.attachedRigidbody != null) {
+            transform.SetParent(collider.attachedRigidbody.transform, true);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision) {
+
+        if (collision.collider.CompareTag("Quiver")) {
+            return;
+        }
+
+        switch (ArrowState) {
+            case ArrowState.FLYING:
+
+                if (!collision.collider.CompareTag("String")) {
+                    EventSystem.current.TriggerOnArrowHit(collision.collider);
+                }
+                break;
+
+            default:
+                break;
+        }
+
+
+
     }
 }
+

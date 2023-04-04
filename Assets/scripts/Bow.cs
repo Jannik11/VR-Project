@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using VirtualGrasp;
 
-public class Bow : MonoBehaviour
-{
+public class Bow : MonoBehaviour {
     public static Bow instance;
 
     [SerializeField] private Transform top;
@@ -16,10 +15,6 @@ public class Bow : MonoBehaviour
 
     [SerializeField] private Transform forceTarget;
 
-
-    [SerializeField] private GameObject flyingArrow;
-    [SerializeField] private GameObject aimingArrow;
-
     private LineRenderer lineRenderer;
 
     private float midDefaultOffset;
@@ -27,17 +22,14 @@ public class Bow : MonoBehaviour
 
     private GameObject currentArrow;
 
-    private float arrowSpeed = 1500.0f;
 
     public BowState BowState { get; private set; } = BowState.IDLE;
-    private void Awake()
-    {
+    private void Awake() {
         instance = this;
     }
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         lineRenderer = GetComponent<LineRenderer>();
 
         midDefaultOffset = mid.localPosition.x;
@@ -52,81 +44,48 @@ public class Bow : MonoBehaviour
     }
 
 
-
-
-
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
 
-        if (stringGrabbed)
-        {
+        if (stringGrabbed) {
             mid.localPosition = new Vector3(Mathf.Clamp(mid.localPosition.x, midDefaultOffset, 60.0f), transform.position.y, transform.position.z);
-            currentArrow?.transform.LookAt(forceTarget, Vector3.up);
 
-        }
-        else
-        {
+        } else {
             mid.localPosition = new Vector3(midDefaultOffset, transform.position.y, transform.position.z);
         }
 
         Vector3[] positions = new Vector3[] { top.position, mid.position, bot.position };
         lineRenderer.SetPositions(positions);
 
+  
+
 
     }
 
-    private void ReleaseString(VG_HandStatus arg0)
-    {
-        if (BowState == BowState.AIMING)
-        {
+    private void ReleaseString(VG_HandStatus arg0) {
+        if (BowState == BowState.AIMING) {
             stringGrabbed = false;
-
-            if (currentArrow)
-            {
-
-                GameObject newFlyingArrow = Instantiate(flyingArrow, currentArrow.transform.position, currentArrow.transform.rotation);
-
-                Destroy(currentArrow);
-                currentArrow = null;
-
-                Vector3 forceVector = forceTarget.position - mid.position;
-
-                Rigidbody rb = newFlyingArrow.GetComponent<Rigidbody>();
-
-                rb.AddForce(forceVector * arrowSpeed);
-                rb.useGravity = true;
-            }
-
-            BowState = BowState.IDLE;
+            EventSystem.current.TriggerOnArrowShoot();
         }
+        BowState = BowState.IDLE;
     }
 
-    private void GrabString(VG_HandStatus arg0)
-    {
-        if (arg0.m_selectedObject.gameObject.tag.Equals("String"))
-        {
+    private void GrabString(VG_HandStatus arg0) {
+        if (arg0.m_selectedObject.gameObject.CompareTag("String")) {
             stringGrabbed = true;
             BowState = BowState.AIMING;
         }
     }
 
-    private void TakeArrow()
-    {
+    private void TakeArrow() {
         BowState = BowState.NOCKING;
     }
 
-    private void NockArrow()
-    {
+    private void NockArrow() {
         BowState = BowState.AIMING;
-
-        stringGrabbed = true;
-        currentArrow = Instantiate(aimingArrow, mid.position, Quaternion.FromToRotation(mid.position, forceTarget.position), mid);
-        currentArrow.transform.LookAt(forceTarget, Vector3.up);
     }
 
-    private void ShootArrow()
-    {
+    private void ShootArrow() {
         BowState = BowState.IDLE;
     }
 }

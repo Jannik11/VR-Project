@@ -39,12 +39,14 @@ public class EventSystem : MonoBehaviour
         }
     }
 
-    public event Action OnArrowHit;
-    public void TriggerOnArrowHit()
+    public event Action<Collider> OnArrowHit;
+    public void TriggerOnArrowHit(Collider collider)
     {
         if (OnArrowHit != null)
         {
-            OnArrowHit();
+            OnArrowHit(collider);
         }
     }
+
+
 }

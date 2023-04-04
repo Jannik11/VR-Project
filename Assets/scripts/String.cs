@@ -6,7 +6,7 @@ public class String : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag.Equals("NockingArrow")) { 
+        if (other.CompareTag("Arrow") && Bow.instance.BowState == BowState.NOCKING) { 
             EventSystem.current.TriggerOnArrowNock();
         }
     }

@@ -34,8 +34,9 @@ public class Bow : MonoBehaviour {
         VG_Controller.OnObjectFullyReleased.AddListener(ReleaseString);
         VG_Controller.OnObjectGrasped.AddListener(GrabString);
 
-        EventSystem.current.OnArrowNock += NockArrow;
-        EventSystem.current.OnArrowShoot += ShootArrow;
+        EventManager.current.OnArrowNock += NockArrow;
+        EventManager.current.OnArrowShoot += ShootArrow;
+
 
     }
 
@@ -52,27 +53,32 @@ public class Bow : MonoBehaviour {
 
         Vector3[] positions = new Vector3[] { top.position, mid.position, bot.position };
         lineRenderer.SetPositions(positions);
-
-
-
-
+        Debug.Log(stringGrabbed);
     }
 
     private void ReleaseString(VG_HandStatus arg0) {
         if (arg0.m_selectedObject.CompareTag("String")) {
-            if (BowState == BowState.AIMING && Quiver.instance.CurrentArrow.ArrowState == ArrowState.INBOW) {
-                EventSystem.current.TriggerOnArrowShoot();
+
+            if (BowState == BowState.AIMING && Hands.instance.IsStringInAnyHand() && Quiver.instance.CurrentArrow && Quiver.instance.CurrentArrow.ArrowState == ArrowState.INBOW) {
+                EventManager.current.TriggerOnArrowShoot();
             }
 
+            EventManager.current.TriggerOnStringRelease();
             stringGrabbed = false;
             BowState = BowState.IDLE;
         }
     }
 
     private void GrabString(VG_HandStatus arg0) {
-        if (arg0.m_selectedObject.gameObject.CompareTag("String")) {
 
-            BowState = BowState.AIMING;
+        if (arg0.m_selectedObject.CompareTag("String")) {
+
+            if (arg0.m_side == VG_HandSide.RIGHT) {
+                EventManager.current.TriggerOnStringGrab(Side.RIGHT);
+            } else if (arg0.m_side == VG_HandSide.LEFT) {
+                EventManager.current.TriggerOnStringGrab(Side.LEFT);
+            }
+
             stringGrabbed = true;
         }
     }

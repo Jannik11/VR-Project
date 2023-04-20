@@ -13,12 +13,14 @@ public class Arrow : MonoBehaviour {
 
     private const float ARROWSPEED = 1500.0f;
 
-    public ArrowState ArrowState { get; private set; } = ArrowState.INHAND;
+    public ArrowState ArrowState { get; private set; } = ArrowState.NONE;
 
     public void Init(Transform hand, Transform bowString, Transform aimTarget) {
         this.hand = hand;
         this.bowString = bowString;
         this.aimTarget = aimTarget;
+
+        ArrowState = ArrowState.INHAND;
 
         transform.SetParent(hand, true);
     }
@@ -26,9 +28,9 @@ public class Arrow : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        EventSystem.current.OnArrowNock += NockArrow;
-        EventSystem.current.OnArrowShoot += ShootArrow;
-        EventSystem.current.OnArrowHit += ArrowHit;
+        EventManager.current.OnArrowNock += NockArrow;
+        EventManager.current.OnArrowShoot += ShootArrow;
+        EventManager.current.OnArrowHit += ArrowHit;
 
         scale = transform.localScale;
     }
@@ -85,6 +87,11 @@ public class Arrow : MonoBehaviour {
         if (collider.attachedRigidbody != null) {
             transform.SetParent(collider.attachedRigidbody.transform, true);
         }
+
+        EventManager.current.OnArrowNock -= NockArrow;
+        EventManager.current.OnArrowShoot -= ShootArrow;
+        EventManager.current.OnArrowHit -= ArrowHit;
+        Destroy(this);
     }
 
     private void OnCollisionEnter(Collision collision) {
@@ -94,7 +101,7 @@ public class Arrow : MonoBehaviour {
         }
         
         if (ArrowState == ArrowState.FLYING) {
-            EventSystem.current.TriggerOnArrowHit(collision.collider);
+            EventManager.current.TriggerOnArrowHit(collision.collider);
         }
     }
 }

@@ -11,7 +11,7 @@ public enum ArrowState {
 }
 
 public enum HandState {
-    ARROW, STRING, BOW, NONE,
+    ARROW, STRING, BOW, NONE
 }
  public enum Side {
     LEFT, RIGHT

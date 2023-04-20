@@ -30,6 +30,9 @@ public class Quiver : MonoBehaviour {
         input.XRILeftHandInteraction.Enable();
         input.XRIRightHandInteraction.Select.performed += GrabArrowRight;
         input.XRILeftHandInteraction.Select.performed += GrabArrowLeft;
+
+        EventManager.current.OnArrowHit += ArrowHit;
+
     }
 
 
@@ -38,28 +41,34 @@ public class Quiver : MonoBehaviour {
         rightHandEnteredQuiver = other.CompareTag("rightHand");
     }
     private void OnTriggerExit(Collider other) {
-        leftHandEnteredQuiver = !other.CompareTag("leftHand");
-        rightHandEnteredQuiver = !other.CompareTag("rightHand");
+        if (leftHandEnteredQuiver && other.CompareTag("leftHand"))
+        leftHandEnteredQuiver = false;
+        if (rightHandEnteredQuiver && other.CompareTag("rightHand"))
+        rightHandEnteredQuiver = false;
     }
 
     private void GrabArrowRight(InputAction.CallbackContext obj) {
-        if (rightHandEnteredQuiver && Hands.instance.Right == HandState.NONE) {
+        if (rightHandEnteredQuiver && Bow.instance.BowState == BowState.IDLE && !Hands.instance.IsArrowInAnyHand()) {
             GrabArrow(rightHand);
-            EventSystem.current.TriggerOnArrowGrab(Side.RIGHT);
+            EventManager.current.TriggerOnArrowGrab(Side.RIGHT);
         }
     }
 
     private void GrabArrowLeft(InputAction.CallbackContext obj) {
-        if (leftHandEnteredQuiver && Hands.instance.Left == HandState.NONE) {
+        if (leftHandEnteredQuiver && Bow.instance.BowState == BowState.IDLE && !Hands.instance.IsArrowInAnyHand()) {
             GrabArrow(leftHand);
-            EventSystem.current.TriggerOnArrowGrab(Side.LEFT);
-        };
+            EventManager.current.TriggerOnArrowGrab(Side.LEFT);
+        }
     }
     private void GrabArrow(Transform hand) {
         if (Bow.instance.BowState == BowState.IDLE) {
             Transform arrow = Instantiate(this.arrow, hand.position, hand.rotation);
-            Arrow arrowScript = arrow.GetComponent<Arrow>();
-            arrowScript.Init(hand, bowString, aimTarget);
+            CurrentArrow = arrow.GetComponent<Arrow>();
+            CurrentArrow.Init(hand, bowString, aimTarget);
         }
+    }
+
+    private void ArrowHit(Collider collider) {
+        CurrentArrow = null;
     }
 }

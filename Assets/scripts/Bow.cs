@@ -53,7 +53,6 @@ public class Bow : MonoBehaviour {
 
         Vector3[] positions = new Vector3[] { top.position, mid.position, bot.position };
         lineRenderer.SetPositions(positions);
-        Debug.Log(stringGrabbed);
     }
 
     private void ReleaseString(VG_HandStatus arg0) {
@@ -84,10 +83,14 @@ public class Bow : MonoBehaviour {
     }
 
     private void NockArrow() {
+        Debug.Log("ArrowNock: Bow");
+
         BowState = BowState.AIMING;
     }
 
     private void ShootArrow() {
+        Debug.Log("Arrowshoot: Bow");
+
         BowState = BowState.IDLE;
     }
 }

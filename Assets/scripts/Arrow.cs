@@ -8,6 +8,7 @@ public class Arrow : MonoBehaviour {
     private Transform hand;
     private Transform bowString;
     private Transform aimTarget;
+    private int id;
 
     private Vector3 scale;
 
@@ -15,7 +16,8 @@ public class Arrow : MonoBehaviour {
 
     public ArrowState ArrowState { get; private set; } = ArrowState.NONE;
 
-    public void Init(Transform hand, Transform bowString, Transform aimTarget) {
+    public void Init(int id, Transform hand, Transform bowString, Transform aimTarget) {
+        this.id = id;
         this.hand = hand;
         this.bowString = bowString;
         this.aimTarget = aimTarget;
@@ -52,6 +54,9 @@ public class Arrow : MonoBehaviour {
     }
 
     public void NockArrow() {
+        Debug.Log("ArrowNock: Arrow");
+
+        EventManager.current.OnArrowNock -= NockArrow;
         ArrowState = ArrowState.INBOW;
 
         transform.position = bowString.position;
@@ -59,6 +64,9 @@ public class Arrow : MonoBehaviour {
     }
 
     public void ShootArrow() {
+        Debug.Log("ArrowShoot: Arrow");
+
+        EventManager.current.OnArrowShoot -= ShootArrow;
         ArrowState = ArrowState.FLYING;
 
         rb = gameObject.AddComponent<Rigidbody>();
@@ -73,11 +81,14 @@ public class Arrow : MonoBehaviour {
         rb.AddForce(forceVector * ARROWSPEED);
     }
 
-    public void ArrowHit(Collider collider) {
-        if (ArrowState != ArrowState.FLYING) {
+    public void ArrowHit(int id, Collider collider) {
+        if (id != this.id || ArrowState != ArrowState.FLYING) {
             return;
         }
 
+        Debug.Log("ArrowHit: Arrow");
+
+        EventManager.current.OnArrowHit -= ArrowHit;
         ArrowState = ArrowState.STICKING;
 
         rb.useGravity = false;
@@ -88,9 +99,6 @@ public class Arrow : MonoBehaviour {
             transform.SetParent(collider.attachedRigidbody.transform, true);
         }
 
-        EventManager.current.OnArrowNock -= NockArrow;
-        EventManager.current.OnArrowShoot -= ShootArrow;
-        EventManager.current.OnArrowHit -= ArrowHit;
         Destroy(this);
     }
 
@@ -101,7 +109,7 @@ public class Arrow : MonoBehaviour {
         }
         
         if (ArrowState == ArrowState.FLYING) {
-            EventManager.current.TriggerOnArrowHit(collision.collider);
+            EventManager.current.TriggerOnArrowHit(id, collision.collider);
         }
     }
 }

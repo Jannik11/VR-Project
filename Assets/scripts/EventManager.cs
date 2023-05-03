@@ -13,7 +13,7 @@ public class EventManager : MonoBehaviour
     }
 
     private void Update() {
-        Debug.Log("Bow: " + Bow.instance.BowState + "\t\t\tArrow: " + Quiver.instance.CurrentArrow?.ArrowState + "\t\t\tHands: " + Hands.instance.Left + " " + Hands.instance.Right);
+        //Debug.Log("Bow: " + Bow.instance.BowState + "\t\t\tArrow: " + Quiver.instance.CurrentArrow?.ArrowState + "\t\t\tHands: " + Hands.instance.Left + " " + Hands.instance.Right);
     }
 
     #region Arrow
@@ -48,13 +48,13 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    public event Action<Collider> OnArrowHit;
-    public void TriggerOnArrowHit(Collider collider)
+    public event Action<int, Collider> OnArrowHit;
+    public void TriggerOnArrowHit(int id, Collider collider)
     {
         if (OnArrowHit != null)
         {
             Debug.Log("ArrowHit");
-            OnArrowHit(collider);
+            OnArrowHit(id, collider);
         }
     } 
 

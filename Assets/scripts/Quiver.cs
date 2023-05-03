@@ -18,6 +18,8 @@ public class Quiver : MonoBehaviour {
     private bool rightHandEnteredQuiver = false;
 
     public static Quiver instance;
+
+    private int currentArrowId = 0;
     public Arrow CurrentArrow { get; private set; }
 
     private void Awake() {
@@ -64,11 +66,13 @@ public class Quiver : MonoBehaviour {
         if (Bow.instance.BowState == BowState.IDLE) {
             Transform arrow = Instantiate(this.arrow, hand.position, hand.rotation);
             CurrentArrow = arrow.GetComponent<Arrow>();
-            CurrentArrow.Init(hand, bowString, aimTarget);
+            CurrentArrow.Init(currentArrowId++, hand, bowString, aimTarget);
         }
     }
 
-    private void ArrowHit(Collider collider) {
-        CurrentArrow = null;
+    private void ArrowHit(int id, Collider collider) {
+        Debug.Log("ArrowHit: Quiver");
+
+        //CurrentArrow = null;
     }
 }

@@ -22,6 +22,10 @@ public class Quiver : MonoBehaviour {
     private int currentArrowId = 0;
     public Arrow CurrentArrow { get; private set; }
 
+
+    private void Update() {
+        Debug.Log("CurrentArrow in Quiver: " + CurrentArrow);
+    }
     private void Awake() {
         instance = this;
     }
@@ -67,6 +71,7 @@ public class Quiver : MonoBehaviour {
             Transform arrow = Instantiate(this.arrow, hand.position, hand.rotation);
             CurrentArrow = arrow.GetComponent<Arrow>();
             CurrentArrow.Init(currentArrowId++, hand, bowString, aimTarget);
+            Debug.Log("currentArrow:" + CurrentArrow);
         }
     }
 

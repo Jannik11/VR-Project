@@ -8,7 +8,7 @@ public class Arrow : MonoBehaviour {
     private Transform hand;
     private Transform bowString;
     private Transform aimTarget;
-    private int id;
+    public int id;
 
     private Vector3 scale;
 
@@ -104,7 +104,7 @@ public class Arrow : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision) {
 
-        if (collision.collider.CompareTag("Quiver") || collision.collider.CompareTag("String")) {
+        if (collision.collider.CompareTag("Quiver") || collision.collider.CompareTag("String") || collision.collider.CompareTag("Glass")) {
             return;
         }
         

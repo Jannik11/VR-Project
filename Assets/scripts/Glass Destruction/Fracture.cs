@@ -36,9 +36,6 @@ public class Fracture : MonoBehaviour {
         }
     }
 
-    public void CauseFracture() {
-        this.ComputeFracture();
-    }
 
     void OnValidate() {
         if (this.transform.parent != null) {
@@ -52,32 +49,8 @@ public class Fracture : MonoBehaviour {
         }
     }
 
-    // void OnCollisionEnter(Collision collision)
-    // {
-    //
-    //         if (collision.contactCount > 0)
-    //         {
-    //             // Collision force must exceed the minimum force (F = I / T)
-    //             var contact = collision.contacts[0];
-    //             float collisionForce = collision.impulse.magnitude / Time.fixedDeltaTime;
-    //
-    //             // Colliding object tag must be in the set of allowed collision tags if filtering by tag is enabled
-    //             bool tagAllowed = triggerOptions.IsTagAllowed(contact.otherCollider.gameObject.tag);
-    //
-    //             // Object is unfrozen if the colliding object has the correct tag (if tag filtering is enabled)
-    //             // and the collision force exceeds the minimum collision force.
-    //             if (collisionForce > triggerOptions.minimumCollisionForce &&
-    //                (!triggerOptions.filterCollisionsByTag || tagAllowed))
-    //             {
-    //                 callbackOptions.CallOnFracture(contact.otherCollider, gameObject, contact.point);
-    //                 this.ComputeFracture();
-    //             }
-    //         }
-    //     
-    // }
-
-    void Update() {
-        if (Input.GetKeyDown(KeyCode.B)) {
+    void OnCollisionEnter(Collision collision) {
+        if (collision.contactCount > 0 && collision.body.CompareTag("Arrow")) {
             this.ComputeFracture();
         }
     }
@@ -100,6 +73,8 @@ public class Fracture : MonoBehaviour {
                 this.fragmentRoot.transform.position = this.transform.position;
                 this.fragmentRoot.transform.rotation = this.transform.rotation;
                 this.fragmentRoot.transform.localScale = Vector3.one;
+
+                fragmentRoot.AddComponent<BrokenGlass>();
             }
 
             var fragmentTemplate = CreateFragmentTemplate();
@@ -114,7 +89,6 @@ public class Fracture : MonoBehaviour {
 
             // Deactivate the original object
             this.gameObject.SetActive(false);
-            
         }
     }
 
@@ -137,12 +111,13 @@ public class Fracture : MonoBehaviour {
         var meshRenderer = obj.AddComponent<MeshRenderer>();
         meshRenderer.sharedMaterials = new Material[2] {
             this.GetComponent<MeshRenderer>().sharedMaterial,
-            this.fractureOptions.insideMaterial
+            this.GetComponent<MeshRenderer>().sharedMaterial
         };
 
         // Copy collider properties to fragment
         var thisCollider = this.GetComponent<Collider>();
         var fragmentCollider = obj.AddComponent<MeshCollider>();
+        fragmentCollider.enabled = false;
         fragmentCollider.convex = true;
         fragmentCollider.sharedMaterial = thisCollider.sharedMaterial;
         fragmentCollider.isTrigger = thisCollider.isTrigger;
@@ -150,11 +125,15 @@ public class Fracture : MonoBehaviour {
         // Copy rigid body properties to fragment
         var thisRigidBody = this.GetComponent<Rigidbody>();
         var fragmentRigidBody = obj.AddComponent<Rigidbody>();
-        fragmentRigidBody.velocity = thisRigidBody.velocity;
+/*        fragmentRigidBody.velocity = thisRigidBody.velocity;
         fragmentRigidBody.angularVelocity = thisRigidBody.angularVelocity;
         fragmentRigidBody.drag = thisRigidBody.drag;
-        fragmentRigidBody.angularDrag = thisRigidBody.angularDrag;
-        fragmentRigidBody.useGravity = true;
+        fragmentRigidBody.angularDrag = thisRigidBody.angularDrag;*/
+
+        fragmentRigidBody.isKinematic = true;
+        fragmentRigidBody.detectCollisions = false;
+
+        obj.AddComponent<Fragment>();
 
         return obj;
     }

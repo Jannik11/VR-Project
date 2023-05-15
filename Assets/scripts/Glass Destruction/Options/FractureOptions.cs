@@ -22,9 +22,6 @@ public class FractureOptions
 
     [Tooltip("Enables detection of \"floating\" fragments when fracturing non-convex meshes. This setting has no effect for convex meshes and should be disabled.")]
     public bool detectFloatingFragments;
-
-    [Tooltip("The material to use for the inside faces")]
-    public Material insideMaterial;
     
     [Tooltip("Scale factor to apply to texture coordinates")]
     public Vector2 textureScale;
@@ -40,7 +37,6 @@ public class FractureOptions
         this.zAxis = true;
         this.detectFloatingFragments = false;
 
-        this.insideMaterial = null;
         this.textureScale = Vector2.one;
         this.textureOffset = Vector2.zero;
     }

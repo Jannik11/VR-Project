@@ -10,6 +10,7 @@ TagManager:
   - Arrow
   - leftHand
   - rightHand
+  - Glass
   layers:
   - Default
   - TransparentFX

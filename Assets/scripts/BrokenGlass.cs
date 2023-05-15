@@ -46,7 +46,7 @@ public class BrokenGlass : MonoBehaviour {
                 topRight = true;
                 someList.AddRange(topRightFragments);
 
-                if(topLeft) {
+                if (topLeft) {
                     someList.AddRange(botLeftFragments);
                     someList.AddRange(botRightFragments);
                 } else if (botLeft) {
@@ -88,12 +88,16 @@ public class BrokenGlass : MonoBehaviour {
 
 
         foreach (Transform fragment in someList) {
+
+            Vector3 fragCenter = fragment.GetComponent<MeshRenderer>().bounds.center;
+
             fragment.GetComponent<MeshCollider>().enabled = true;
 
             Rigidbody rb = fragment.GetComponent<Rigidbody>();
             rb.isKinematic = false;
             rb.detectCollisions = true;
-            rb.velocity = Vector3.forward * 5.0f;
+
+            rb.velocity = new Vector3(Random.Range(-2.0f, 2.0f), Random.Range(-2.0f, 2.0f), Random.Range(5.0f, 10.0f) * (1.0f - (Vector3.Distance(hitPoint, fragCenter) / 5.0f)) );
         }
 
     }

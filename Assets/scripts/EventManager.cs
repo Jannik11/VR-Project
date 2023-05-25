@@ -93,4 +93,21 @@ public class EventManager : MonoBehaviour
         }
     }
     #endregion
+    
+    #region Highscore
+    public event Action OnGameStart;
+    public void TriggerOnGameStart() {
+        if (OnGameStart != null)
+        {
+            OnGameStart();
+        }
+    } 
+    public event Action OnGameEnd;
+    public void TriggerOnGameEnd() {
+        if (OnGameEnd != null)
+        {
+            OnGameEnd();
+        }
+    }
+    #endregion
 }

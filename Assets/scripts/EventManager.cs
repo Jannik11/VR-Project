@@ -26,7 +26,7 @@ public class EventManager : MonoBehaviour
             Debug.Log("ArrowGrab " + side);
             OnArrowGrab(side);
         }
-    }
+    } 
 
     public event Action OnArrowNock;
     public void TriggerOnArrowNock()
@@ -108,6 +108,15 @@ public class EventManager : MonoBehaviour
         {
             OnGameEnd();
         }
+    }   
+    public event Action OnGamePause;
+    public void TriggerOnGamePause() {
+        if (OnGamePause != null)
+        {
+            OnGamePause();
+        }
     }
+
+
     #endregion
 }

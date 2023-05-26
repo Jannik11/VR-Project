@@ -31,8 +31,8 @@ public class Bow : MonoBehaviour {
 
         midDefaultOffset = mid.localPosition.x;
 
-        VG_Controller.OnObjectFullyReleased.AddListener(ReleaseString);
-        VG_Controller.OnObjectGrasped.AddListener(GrabString);
+        VG_Controller.OnObjectFullyReleased.AddListener(ReleaseObject);
+        VG_Controller.OnObjectGrasped.AddListener(GrabObject);
 
         EventManager.current.OnArrowNock += NockArrow;
         EventManager.current.OnArrowShoot += ShootArrow;
@@ -55,7 +55,7 @@ public class Bow : MonoBehaviour {
         lineRenderer.SetPositions(positions);
     }
 
-    private void ReleaseString(VG_HandStatus arg0) {
+    private void ReleaseObject(VG_HandStatus arg0) {
         if (arg0.m_selectedObject.CompareTag("String")) {
 
             if (BowState == BowState.AIMING && Hands.instance.IsStringInAnyHand() && Quiver.instance.CurrentArrow && Quiver.instance.CurrentArrow.ArrowState == ArrowState.INBOW) {
@@ -65,10 +65,13 @@ public class Bow : MonoBehaviour {
             EventManager.current.TriggerOnStringRelease();
             stringGrabbed = false;
             BowState = BowState.IDLE;
+        } else if (arg0.m_selectedObject.CompareTag("Bow")) {
+            EventManager.current.TriggerOnBowRelease();
+            EventManager.current.TriggerOnGamePause();
         }
     }
 
-    private void GrabString(VG_HandStatus arg0) {
+    private void GrabObject(VG_HandStatus arg0) {
 
         if (arg0.m_selectedObject.CompareTag("String")) {
 
@@ -79,6 +82,14 @@ public class Bow : MonoBehaviour {
             }
 
             stringGrabbed = true;
+        } else if(arg0.m_selectedObject.CompareTag("Bow")) {
+            if (arg0.m_side == VG_HandSide.RIGHT) {
+                EventManager.current.TriggerOnBowGrab(Side.RIGHT);
+            } else if (arg0.m_side == VG_HandSide.LEFT) {
+                EventManager.current.TriggerOnBowGrab(Side.LEFT);
+            }
+            Debug.Log("Trigger Event Start");
+            EventManager.current.TriggerOnGameStart();
         }
     }
 

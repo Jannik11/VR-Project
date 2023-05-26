@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SimpleTimer : MonoBehaviour
-{ 
-    private float timer = 0.0f;
+public class SimpleTimer : MonoBehaviour {
+    public float Timer{ get; private set;} = 0.0f ;
 
     private bool running = false;
 
@@ -13,20 +12,25 @@ public class SimpleTimer : MonoBehaviour
     {
         if (running)
         {
-            timer += Time.deltaTime;
+            Timer += Time.deltaTime;
         }
+        Debug.Log("Timer:" + Timer);
     }
 
-    public void StartTimer()
+    public void ResumeTimer()
     {
         running = true;
+    }
+    public void PauseTimer()
+    {
+        running = false;
     }
 
     public float EndTimer()
     {
         running = false;
-        float toReturn = timer;
-        timer = 0.0f;
+        float toReturn = Timer;
+        Timer = 0.0f;
         return toReturn;
     }
 }

@@ -11,6 +11,7 @@ TagManager:
   - leftHand
   - rightHand
   - Glass
+  - Bow
   layers:
   - Default
   - TransparentFX

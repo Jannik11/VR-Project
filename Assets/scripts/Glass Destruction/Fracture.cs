@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -53,7 +54,8 @@ public class Fracture : MonoBehaviour {
     }
 
     void OnCollisionEnter(Collision collision) {
-        if (collision.contactCount > 0 && collision.body.CompareTag("Arrow")) {
+        Debug.Log("Collision contactCount: " + collision.contactCount + " Collision.body: " + collision.body);
+        if (collision.contactCount > 0 && collision.body != null &&collision.body.CompareTag("Arrow")) {
             this.ComputeFracture();
         }
     }

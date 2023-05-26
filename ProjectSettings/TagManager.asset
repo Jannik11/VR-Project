@@ -12,6 +12,7 @@ TagManager:
   - rightHand
   - Glass
   - Bow
+  - Hitbox
   layers:
   - Default
   - TransparentFX

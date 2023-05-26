@@ -80,7 +80,6 @@ public class Bow : MonoBehaviour {
             } else if (arg0.m_side == VG_HandSide.LEFT) {
                 EventManager.current.TriggerOnStringGrab(Side.LEFT);
             }
-
             stringGrabbed = true;
         } else if(arg0.m_selectedObject.CompareTag("Bow")) {
             if (arg0.m_side == VG_HandSide.RIGHT) {

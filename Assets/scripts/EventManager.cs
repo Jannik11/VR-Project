@@ -115,6 +115,13 @@ public class EventManager : MonoBehaviour
         {
             OnGamePause();
         }
+    }  
+    public event Action OnPlayerHit;
+    public void TriggerOnPlayerHit() {
+        if (OnPlayerHit != null)
+        {
+            OnPlayerHit();
+        }
     }
 
 

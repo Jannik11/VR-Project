@@ -10,9 +10,6 @@ public class HighscoreHandler : MonoBehaviour {
     [SerializeField] string filename;
 
     private void Start() {
-        EventManager.current.OnGameStart += ResumeTimer;
-        EventManager.current.OnGameEnd += PauseTimer;
-
     }
 
     public void ResumeTimer() {
@@ -24,6 +21,7 @@ public class HighscoreHandler : MonoBehaviour {
     }
 
     public float EndGame() {
+        Debug.Log("spiel wird beendet");
         float score = timer.EndTimer();
         string date = "";
         AddHighscoreIfPossible(new HighscoreElement(date, score));
@@ -50,7 +48,7 @@ public class HighscoreHandler : MonoBehaviour {
 
     public void AddHighscoreIfPossible(HighscoreElement element) {
         for (int i = 0; i < maxHighscores; i++) {
-            if (i > _highscoreElements.Count || element.score > _highscoreElements[i].score) {
+            if (i >= _highscoreElements.Count || element.score > _highscoreElements[i].score) {
                 _highscoreElements.Insert(i, element);
                 while (_highscoreElements.Count > maxHighscores) {
                     _highscoreElements.RemoveAt(maxHighscores);

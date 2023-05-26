@@ -14,7 +14,6 @@ public class SimpleTimer : MonoBehaviour {
         {
             Timer += Time.deltaTime;
         }
-        Debug.Log("Timer:" + Timer);
     }
 
     public void ResumeTimer()

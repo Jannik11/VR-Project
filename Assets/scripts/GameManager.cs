@@ -34,17 +34,22 @@ public class GameManager : MonoBehaviour {
         PauseScreen.SetActive(true);
     }
     void EndGame() {
+        Debug.Log("WHYYYYYY!");
         lives = 3;
         float endScore = highscoreHandler.EndGame();
         score.text = endScore.ToString();
         highscoreHandler.EndGame();
         PauseScreen.SetActive(true);
+
+        livesText.text = "GAME OVER!!!\nRelease the bow to see your results.";
     }
     void PlayerHit() {
         lives--;
         livesText.text = "Leben: " + lives.ToString();
-        Debug.Log("Leben übrig: " + lives);
+        Debug.Log("Leben übrig: " + lives + " " + (lives <= 0));
         if(lives <= 0) {
+            Debug.Log("Trigger event");
+
             EventManager.current.TriggerOnGameEnd();
         }
     }

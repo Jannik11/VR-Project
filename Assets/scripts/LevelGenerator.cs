@@ -22,29 +22,60 @@ public class LevelGenerator : MonoBehaviour {
 
     [SerializeField] int chunkSize;
 
+    private bool running = false;
+
 
     // Start is called before the first frame update
     void Start() {
+        EventManager.current.OnGamePause += PauseGame;
+        EventManager.current.OnGameStart += StartGame;
+        EventManager.current.OnGameEnd += EndGame;
+        GenerateLevel();
+    }
+
+    private void GenerateLevel() {
         for (int i = 0; i < chunksToLoad; i++) {
             int idx = UnityEngine.Random.Range(0, targets.Length);
             spawnedTargets.Add(Instantiate<Transform>(targets[idx], new Vector3(0, 0, chunkSize * i), Quaternion.identity));
-
         }
     }
 
+    private void EndGame() {
+        foreach (Transform transform in spawnedTargets) {
+            Destroy(transform);
+        }
+        spawnedTargets = new List<Transform>();
+        GenerateLevel();
+        distanceTraveled = 0.0f;
+    }
+
+    private void StartGame() {
+        running = true;
+    }
+
+    private void PauseGame() {
+        running = false;
+    }
+
+
+
+
+
     // Update is called once per frame
     void Update() {
-        float distance = -speed * Time.deltaTime;
-        distanceTraveled += distance;
+        if (running) {
+            float distance = -speed * Time.deltaTime;
+            distanceTraveled += distance;
 
-        if (Math.Abs(distanceTraveled) > chunkSize) {
-            Destroy(spawnedTargets[0].gameObject);
-            spawnedTargets.RemoveAt(0);
-            distanceTraveled = 0;
-            spawnedTargets.Add(Instantiate<Transform>(targets[UnityEngine.Random.Range(0, targets.Length)], new Vector3(0, 0, chunkSize * (chunksToLoad - 1) ), Quaternion.identity));
-        }
-        foreach (Transform target in spawnedTargets) {
-            target.transform.Translate(new Vector3(0, 0, distance));
+            if (Math.Abs(distanceTraveled) > chunkSize) {
+                Destroy(spawnedTargets[0].gameObject);
+                spawnedTargets.RemoveAt(0);
+                distanceTraveled = 0;
+                spawnedTargets.Add(Instantiate<Transform>(targets[UnityEngine.Random.Range(0, targets.Length)], new Vector3(0, 0, chunkSize * (chunksToLoad - 1)), Quaternion.identity));
+            }
+            foreach (Transform target in spawnedTargets) {
+                target.transform.Translate(new Vector3(0, 0, distance));
+            }
         }
     }
 }

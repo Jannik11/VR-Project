@@ -36,6 +36,7 @@ public class Split2by2 : HitZoneSplit {
                 }
             }
         }
+        Debug.Log("ZONEN: " + zones[0].Count + " " + zones[1].Count + " " + zones[2].Count + " " + zones[3].Count);
     }
 
     public override List<Transform> RegisterHit(Vector3 hitPoint, Transform transform) {

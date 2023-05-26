@@ -7,10 +7,16 @@ public class BrokenGlass : MonoBehaviour {
     private HitZoneSplit hitZoneSplit;
 
     // Start is called before the first frame update
-    public void Init(HitZoneType hitZoneType) {
+    public void Start() {
         Vector3 center = transform.position;
 
-        switch (hitZoneType) {
+        hitZoneSplit = new Split2by2();
+        hitZoneSplit.Split(center, transform);
+    }
+    
+    public void Init(HitZoneType hitZoneType) {
+
+        /*switch (hitZoneType) {
             case HitZoneType._2by2:
 
                 hitZoneSplit = new Split2by2();
@@ -18,9 +24,7 @@ public class BrokenGlass : MonoBehaviour {
                 break;
             case HitZoneType._1by3:
                 break;
-        }
-
-        hitZoneSplit.Split(center, transform);
+        }*/
     }
 
 

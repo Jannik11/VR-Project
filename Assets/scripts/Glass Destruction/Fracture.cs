@@ -13,6 +13,9 @@ public class Fracture : MonoBehaviour {
     /// </summary>
     [HideInInspector] public int currentRefractureCount = 0;
 
+
+    [SerializeField] public HitZoneType hitZoneType = HitZoneType._2by2;
+
     /// <summary>
     /// Collector object that stores the produced fragments
     /// </summary>
@@ -74,7 +77,8 @@ public class Fracture : MonoBehaviour {
                 this.fragmentRoot.transform.rotation = this.transform.rotation;
                 this.fragmentRoot.transform.localScale = Vector3.one;
 
-                fragmentRoot.AddComponent<BrokenGlass>();
+                BrokenGlass bg = fragmentRoot.AddComponent<BrokenGlass>();
+                bg.Init(hitZoneType);
             }
 
             var fragmentTemplate = CreateFragmentTemplate();

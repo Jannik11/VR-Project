@@ -4,88 +4,29 @@ using UnityEngine;
 
 public class BrokenGlass : MonoBehaviour {
 
-    private List<Transform> topLeftFragments = new List<Transform>(),
-        topRightFragments = new List<Transform>(),
-        botLeftFragments = new List<Transform>(),
-        botRightFragments = new List<Transform>();
-
-    private bool topLeft, topRight, botLeft, botRight;
+    private HitZoneSplit hitZoneSplit;
 
     // Start is called before the first frame update
-    void Start() {
+    public void Init(HitZoneType hitZoneType) {
         Vector3 center = transform.position;
 
-        foreach (Transform fragment in transform) {
+        switch (hitZoneType) {
+            case HitZoneType._2by2:
 
-            Vector3 fragCenter = fragment.GetComponent<MeshRenderer>().bounds.center;
+                hitZoneSplit = new Split2by2();
 
-            if (fragCenter.x > center.x) {
-                if (fragCenter.y > center.y) {
-                    topRightFragments.Add(fragment);
-                } else {
-                    botRightFragments.Add(fragment);
-                }
-            } else {
-
-                if (fragCenter.y > center.y) {
-                    topLeftFragments.Add(fragment);
-                } else {
-                    botLeftFragments.Add(fragment);
-                }
-            }
+                break;
+            case HitZoneType._1by3:
+                break;
         }
+
+        hitZoneSplit.Split(center, transform);
     }
+
 
     public void RegisterHit(Vector3 hitPoint) {
         Vector3 center = transform.position;
-        List<Transform> someList = new List<Transform>();
-
-
-        if (hitPoint.x > center.x) {
-            if (hitPoint.y > center.y) {
-                topRight = true;
-                someList.AddRange(topRightFragments);
-
-                if (topLeft) {
-                    someList.AddRange(botLeftFragments);
-                    someList.AddRange(botRightFragments);
-                } else if (botLeft) {
-                    someList.AddRange(botRightFragments);
-                }
-
-            } else {
-                botRight = true;
-                someList.AddRange(botRightFragments);
-
-                if (topLeft) {
-                    someList.AddRange(botLeftFragments);
-                }
-
-            }
-        } else {
-
-            if (hitPoint.y > center.y) {
-                topLeft = true;
-                someList.AddRange(topLeftFragments);
-
-                if (topRight) {
-                    someList.AddRange(botLeftFragments);
-                    someList.AddRange(botRightFragments);
-                } else if (botRight) {
-                    someList.AddRange(botLeftFragments);
-                }
-
-            } else {
-                botLeft = true;
-                someList.AddRange(botLeftFragments);
-
-                if (topRight) {
-                    someList.AddRange(botRightFragments);
-                }
-            }
-        }
-
-
+        List<Transform> someList = hitZoneSplit.RegisterHit(hitPoint, transform);
 
         foreach (Transform fragment in someList) {
 

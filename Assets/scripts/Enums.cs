@@ -13,8 +13,9 @@ public enum ArrowState {
 public enum HandState {
     ARROW, STRING, BOW, NONE
 }
- public enum Side {
+public enum Side {
     LEFT, RIGHT
 }
 
-
+public enum HitZoneType { _2by2, _1by3 }
+public enum AttachmentType { TOP, RIGHT, BOTTOM, LEFT, VERTICAL, HORIZONTAL }

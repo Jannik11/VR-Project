@@ -81,7 +81,7 @@ public class Fracture : MonoBehaviour {
                 this.fragmentRoot.transform.localScale = Vector3.one;
 
                 BrokenGlass bg = fragmentRoot.AddComponent<BrokenGlass>();
-                bg.Init(hitZoneType, attachmentType);
+                bg.Init(hitZoneType, attachmentType, transform);
             }
 
             var fragmentTemplate = CreateFragmentTemplate();
@@ -132,6 +132,8 @@ public class Fracture : MonoBehaviour {
         // Copy rigid body properties to fragment
         var thisRigidBody = this.GetComponent<Rigidbody>();
         var fragmentRigidBody = obj.AddComponent<Rigidbody>();
+
+
 /*        fragmentRigidBody.velocity = thisRigidBody.velocity;
         fragmentRigidBody.angularVelocity = thisRigidBody.angularVelocity;
         fragmentRigidBody.drag = thisRigidBody.drag;

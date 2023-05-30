@@ -9,7 +9,7 @@ public class Split1by3 : HitZoneSplit {
 
     public Split1by3(AttachmentType attachmentType) : base(attachmentType) { }
 
-    public override void Split(Transform transform) {
+    public override void Split(Transform fragmentParent, Transform original) {
 
         zones = new List<Transform>[] {
             new List<Transform>(),
@@ -18,14 +18,16 @@ public class Split1by3 : HitZoneSplit {
 
         hitZones = new bool[] { false, false, false};
 
-        MeshRenderer mr = transform.gameObject.GetComponent<MeshRenderer>();
+        MeshRenderer mr = original.GetComponent<MeshRenderer>();
 
         float sectionHeightY = (mr.bounds.max.y - mr.bounds.min.y) / 3.0f;
 
         topBorderY = mr.bounds.max.y - sectionHeightY;
         botBorderY = mr.bounds.min.y + sectionHeightY;
 
-        foreach (Transform fragment in transform) {
+        Debug.Log(topBorderY + " " + botBorderY);
+
+        foreach (Transform fragment in fragmentParent) {
 
             Vector3 fragCenter = fragment.GetComponent<MeshRenderer>().bounds.center;
 

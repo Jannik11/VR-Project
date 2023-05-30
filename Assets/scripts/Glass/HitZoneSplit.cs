@@ -12,7 +12,7 @@ public abstract class HitZoneSplit {
         this.attachmentType = attachmentType;
     }
 
-    public abstract void Split(Transform transform);
+    public abstract void Split(Transform fragmentParent, Transform original);
     public abstract List<Transform> RegisterHit(Vector3 hitPoint, Transform transform);
 
     }

@@ -5,13 +5,16 @@ using UnityEngine;
 public class BrokenGlass : MonoBehaviour {
 
     private HitZoneSplit hitZoneSplit;
+    private Transform originalGlass;
 
     // Start is called before the first frame update
     public void Start() {
-        hitZoneSplit.Split(transform);
+        hitZoneSplit.Split(transform, originalGlass);
     }
 
-    public void Init(HitZoneType hitZoneType, AttachmentType attachmentType) {
+    public void Init(HitZoneType hitZoneType, AttachmentType attachmentType, Transform originalGlass) {
+
+        this.originalGlass = originalGlass;
 
         switch (hitZoneType) {
             case HitZoneType._2by2:
@@ -41,7 +44,7 @@ public class BrokenGlass : MonoBehaviour {
             rb.isKinematic = false;
             rb.detectCollisions = true;
 
-            rb.velocity = new Vector3(Random.Range(-2.0f, 2.0f), Random.Range(-2.0f, 2.0f), Random.Range(5.0f, 10.0f) * (1.0f - (Vector3.Distance(hitPoint, fragCenter) / 5.0f)));
+            rb.AddForce(new Vector3(Random.Range(-2.0f, 2.0f), Random.Range(-2.0f, 2.0f), Random.Range(5.0f, 10.0f) * (1.0f - (Vector3.Distance(hitPoint, fragCenter) / 5.0f))));
         }
 
     }

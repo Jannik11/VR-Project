@@ -6,7 +6,7 @@ public class Split2by2 : HitZoneSplit {
 
     public Split2by2(AttachmentType attachmentType) : base(attachmentType) { }
 
-    public override void Split(Transform transform) {
+    public override void Split(Transform fragmentParent, Transform original) {
 
         zones = new List<Transform>[] {
             new List<Transform>(),
@@ -16,9 +16,9 @@ public class Split2by2 : HitZoneSplit {
 
         hitZones = new bool[] { false, false, false, false };
 
-        Vector3 center = transform.position;
+        Vector3 center = fragmentParent.position;
 
-        foreach (Transform fragment in transform) {
+        foreach (Transform fragment in fragmentParent) {
 
             Vector3 fragCenter = fragment.GetComponent<MeshRenderer>().bounds.center;
 

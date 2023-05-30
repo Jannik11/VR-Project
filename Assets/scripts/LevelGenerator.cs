@@ -16,6 +16,10 @@ public class LevelGenerator : MonoBehaviour {
 
     [SerializeField] float speed = 5;
 
+    float actualSpeed;
+
+    [SerializeField] float speedIncrease = 5;
+
     float distanceTraveled;
 
     [SerializeField] int chunksToLoad;
@@ -27,6 +31,7 @@ public class LevelGenerator : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+        actualSpeed = speed;
         EventManager.current.OnGamePause += PauseGame;
         EventManager.current.OnGameStart += StartGame;
         EventManager.current.OnGameEnd += EndGame;
@@ -47,6 +52,7 @@ public class LevelGenerator : MonoBehaviour {
         spawnedTargets = new List<Transform>();
         GenerateLevel();
         distanceTraveled = 0.0f;
+        actualSpeed = speed;
     }
 
     private void StartGame() {
@@ -64,7 +70,8 @@ public class LevelGenerator : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (running) {
-            float distance = -speed * Time.deltaTime;
+            actualSpeed += speedIncrease * Time.deltaTime;
+            float distance = -actualSpeed * Time.deltaTime;
             distanceTraveled += distance;
 
             if (Math.Abs(distanceTraveled) > chunkSize) {

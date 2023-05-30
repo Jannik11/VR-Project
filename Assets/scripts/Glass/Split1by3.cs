@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Split1by3 : HitZoneSplit {
 
-    private float topBorderY;
-    private float botBorderY;
+    private float fstBorder;
+    private float sndBorder;
 
     public Split1by3(AttachmentType attachmentType) : base(attachmentType) { }
 
@@ -16,28 +16,58 @@ public class Split1by3 : HitZoneSplit {
             new List<Transform>(),
             new List<Transform>()};
 
-        hitZones = new bool[] { false, false, false };
-
         MeshRenderer mr = original.GetComponent<MeshRenderer>();
 
-        float sectionHeightY = (mr.bounds.max.y - mr.bounds.min.y) / 3.0f;
+        switch(attachmentType) {
+            case AttachmentType.TOP:
+            case AttachmentType.BOTTOM:
+            case AttachmentType.VERTICAL:
+                float sectionHeightY = (mr.bounds.max.y - mr.bounds.min.y) / 3.0f;
 
-        topBorderY = mr.bounds.max.y - sectionHeightY;
-        botBorderY = mr.bounds.min.y + sectionHeightY;
+                fstBorder = mr.bounds.max.y - sectionHeightY;
+                sndBorder = mr.bounds.min.y + sectionHeightY;
 
-        foreach (Transform fragment in fragmentParent) {
+                foreach (Transform fragment in fragmentParent) {
 
-            Vector3 fragCenter = fragment.GetComponent<MeshRenderer>().bounds.center;
+                    Vector3 fragCenter = fragment.GetComponent<MeshRenderer>().bounds.center;
 
-            if (fragCenter.y > topBorderY) {
-                zones[0].Add(fragment);
-            }
-            else if (fragCenter.y > botBorderY) {
-                zones[1].Add(fragment);
-            }
-            else {
-                zones[2].Add(fragment);
-            }
+                    if (fragCenter.y > fstBorder) {
+                        zones[0].Add(fragment);
+                    }
+                    else if (fragCenter.y > sndBorder) {
+                        zones[1].Add(fragment);
+                    }
+                    else {
+                        zones[2].Add(fragment);
+                    }
+                }
+                break;
+
+            case AttachmentType.LEFT:
+            case AttachmentType.RIGHT:
+            case AttachmentType.HORIZONTAL:
+                float sectionHeightX = (mr.bounds.max.x - mr.bounds.min.x) / 3.0f;
+
+                fstBorder = mr.bounds.max.x - sectionHeightX;
+                sndBorder = mr.bounds.min.x + sectionHeightX;
+
+                foreach (Transform fragment in fragmentParent) {
+
+                    Vector3 fragCenter = fragment.GetComponent<MeshRenderer>().bounds.center;
+
+                    if (fragCenter.x > fstBorder) {
+                        zones[2].Add(fragment);
+                    }
+                    else if (fragCenter.x > sndBorder) {
+                        zones[1].Add(fragment);
+                    }
+                    else {
+                        zones[0].Add(fragment);
+                    }
+                }
+                break;
+            default:
+                break;
         }
     }
 
@@ -47,47 +77,96 @@ public class Split1by3 : HitZoneSplit {
 
         switch (attachmentType) {
             case AttachmentType.TOP:
-                if (hitPoint.y > topBorderY) {
-                    hitZones[0] = true;
+                if (hitPoint.y > fstBorder) {
                     someList.AddRange(zones[0]);
                     someList.AddRange(zones[1]);
                     someList.AddRange(zones[2]);
                 }
-                else if (hitPoint.y > botBorderY) {
-                    hitZones[1] = true;
+                else if (hitPoint.y > sndBorder) {
                     someList.AddRange(zones[1]);
                     someList.AddRange(zones[2]);
                 }
                 else {
-                    hitZones[2] = true;
                     someList.AddRange(zones[2]);
                 }
                 break;
 
             case AttachmentType.BOTTOM:
-                if (hitPoint.y > topBorderY) {
-                    hitZones[0] = true;
+                if (hitPoint.y > fstBorder) {
                     someList.AddRange(zones[0]);
                 }
-                else if (hitPoint.y > botBorderY) {
-                    hitZones[1] = true;
+                else if (hitPoint.y > sndBorder) {
                     someList.AddRange(zones[1]);
                     someList.AddRange(zones[0]);
                 }
                 else {
-                    hitZones[2] = true;
                     someList.AddRange(zones[2]);
                     someList.AddRange(zones[1]);
                     someList.AddRange(zones[0]);
+                }
+                break;
+
+            case AttachmentType.VERTICAL:
+                if (hitPoint.y > fstBorder) {
+                    someList.AddRange(zones[2]);
+                    someList.AddRange(zones[1]);
+                }
+                else if (hitPoint.y > sndBorder) {
+                    someList.AddRange(zones[1]);
+                }
+                else {
+                    someList.AddRange(zones[0]);
+                    someList.AddRange(zones[1]);
+                }
+                break;
+
+            case AttachmentType.LEFT:
+                if (hitPoint.x > fstBorder) {
+                    someList.AddRange(zones[2]);
+                }
+                else if (hitPoint.x > sndBorder) {
+                    someList.AddRange(zones[1]);
+                    someList.AddRange(zones[2]);
+                }
+                else {
+                    someList.AddRange(zones[0]);
+                    someList.AddRange(zones[1]);
+                    someList.AddRange(zones[2]);
+                }
+                break;
+
+            case AttachmentType.RIGHT:
+                if (hitPoint.x > fstBorder) {
+                    someList.AddRange(zones[2]);
+                    someList.AddRange(zones[1]);
+                    someList.AddRange(zones[0]);
+                }
+                else if (hitPoint.x > sndBorder) {
+                    someList.AddRange(zones[1]);
+                    someList.AddRange(zones[0]);
+                }
+                else {
+                    someList.AddRange(zones[0]);
+                }
+                break;
+
+            case AttachmentType.HORIZONTAL:
+                if (hitPoint.x > fstBorder) {
+                    someList.AddRange(zones[2]);
+                    someList.AddRange(zones[1]);
+                }
+                else if (hitPoint.x > sndBorder) {
+                    someList.AddRange(zones[1]);
+                }
+                else {
+                    someList.AddRange(zones[0]);
+                    someList.AddRange(zones[1]);
                 }
                 break;
 
             default:
                 break;
         }
-
-
-
 
         return someList;
     }

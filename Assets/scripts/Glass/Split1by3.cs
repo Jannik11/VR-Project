@@ -16,7 +16,7 @@ public class Split1by3 : HitZoneSplit {
             new List<Transform>(),
             new List<Transform>()};
 
-        hitZones = new bool[] { false, false, false};
+        hitZones = new bool[] { false, false, false };
 
         MeshRenderer mr = original.GetComponent<MeshRenderer>();
 
@@ -31,9 +31,11 @@ public class Split1by3 : HitZoneSplit {
 
             if (fragCenter.y > topBorderY) {
                 zones[0].Add(fragment);
-            } else if (fragCenter.y > botBorderY) {
+            }
+            else if (fragCenter.y > botBorderY) {
                 zones[1].Add(fragment);
-            } else {
+            }
+            else {
                 zones[2].Add(fragment);
             }
         }
@@ -43,21 +45,49 @@ public class Split1by3 : HitZoneSplit {
         Vector3 center = transform.position;
         List<Transform> someList = new List<Transform>();
 
-        if (hitPoint.y > topBorderY) {
-            hitZones[0] = true;
-            someList.AddRange(zones[0]);
-            someList.AddRange(zones[1]);
-            someList.AddRange(zones[2]);
+        switch (attachmentType) {
+            case AttachmentType.TOP:
+                if (hitPoint.y > topBorderY) {
+                    hitZones[0] = true;
+                    someList.AddRange(zones[0]);
+                    someList.AddRange(zones[1]);
+                    someList.AddRange(zones[2]);
+                }
+                else if (hitPoint.y > botBorderY) {
+                    hitZones[1] = true;
+                    someList.AddRange(zones[1]);
+                    someList.AddRange(zones[2]);
+                }
+                else {
+                    hitZones[2] = true;
+                    someList.AddRange(zones[2]);
+                }
+                break;
+
+            case AttachmentType.BOTTOM:
+                if (hitPoint.y > topBorderY) {
+                    hitZones[0] = true;
+                    someList.AddRange(zones[0]);
+                }
+                else if (hitPoint.y > botBorderY) {
+                    hitZones[1] = true;
+                    someList.AddRange(zones[1]);
+                    someList.AddRange(zones[0]);
+                }
+                else {
+                    hitZones[2] = true;
+                    someList.AddRange(zones[2]);
+                    someList.AddRange(zones[1]);
+                    someList.AddRange(zones[0]);
+                }
+                break;
+
+            default:
+                break;
         }
-        else if (hitPoint.y > botBorderY) {
-            hitZones[1] = true;
-            someList.AddRange(zones[1]);
-            someList.AddRange(zones[2]);
-        }
-        else {
-            hitZones[2] = true;
-            someList.AddRange(zones[2]);
-        }
+
+
+
 
         return someList;
     }

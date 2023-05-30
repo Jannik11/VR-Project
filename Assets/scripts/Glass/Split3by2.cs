@@ -23,7 +23,7 @@ public class Split3by2 : HitZoneSplit {
 
         MeshRenderer mr = original.GetComponent<MeshRenderer>();
 
-        float sectionHeightX = (mr.bounds.max.x - mr.bounds.min.x) / 3.0f;
+        float sectionHeightX = (mr.bounds.max.x - mr.bounds.min.x) / 5.0f;
 
         rightBorderX = mr.bounds.max.x - sectionHeightX;
         leftBorderX = mr.bounds.min.x + sectionHeightX;

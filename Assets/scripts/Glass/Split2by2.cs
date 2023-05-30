@@ -68,11 +68,9 @@ public class Split2by2 : HitZoneSplit {
                 if (hitZones[0]) {
                     someList.AddRange(zones[2]);
                 }
-
             }
         }
         else {
-
             if (hitPoint.y > center.y) {
                 hitZones[0] = true;
                 someList.AddRange(zones[0]);
@@ -84,7 +82,6 @@ public class Split2by2 : HitZoneSplit {
                 else if (hitZones[3]) {
                     someList.AddRange(zones[2]);
                 }
-
             }
             else {
                 hitZones[2] = true;

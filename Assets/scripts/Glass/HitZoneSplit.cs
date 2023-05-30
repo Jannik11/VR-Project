@@ -6,7 +6,7 @@ public abstract class HitZoneSplit {
 
     public List<Transform>[] zones;
     public bool[] hitZones;
-    private AttachmentType attachmentType;
+    protected AttachmentType attachmentType;
 
     public HitZoneSplit(AttachmentType attachmentType) {
         this.attachmentType = attachmentType;

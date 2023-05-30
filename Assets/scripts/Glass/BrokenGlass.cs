@@ -25,6 +25,10 @@ public class BrokenGlass : MonoBehaviour {
 
                 hitZoneSplit = new Split1by3(attachmentType);
                 break;
+            case HitZoneType._3by2:
+
+                hitZoneSplit = new Split3by2(attachmentType);
+                break;
         }
 
         hitZoneSplit.Split(transform, originalGlass);

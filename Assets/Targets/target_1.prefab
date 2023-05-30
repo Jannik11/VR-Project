@@ -186,7 +186,7 @@ MonoBehaviour:
     textureOffset: {x: 0, y: 0}
   currentRefractureCount: 0
   hitZoneType: 1
-  attachmentType: 0
+  attachmentType: 2
 --- !u!1 &5727388889621054174
 GameObject:
   m_ObjectHideFlags: 0

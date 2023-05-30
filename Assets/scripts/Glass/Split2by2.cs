@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Split2by2 : HitZoneSplit {
 
-    public override void Split(Vector3 center, Transform transform) {
+    public Split2by2(AttachmentType attachmentType) : base(attachmentType) { }
+
+    public override void Split(Transform transform) {
 
         zones = new List<Transform>[] {
             new List<Transform>(),
@@ -13,6 +15,8 @@ public class Split2by2 : HitZoneSplit {
             new List<Transform>()};
 
         hitZones = new bool[] { false, false, false, false };
+
+        Vector3 center = transform.position;
 
         foreach (Transform fragment in transform) {
 
@@ -36,7 +40,6 @@ public class Split2by2 : HitZoneSplit {
                 }
             }
         }
-        Debug.Log("ZONEN: " + zones[0].Count + " " + zones[1].Count + " " + zones[2].Count + " " + zones[3].Count);
     }
 
     public override List<Transform> RegisterHit(Vector3 hitPoint, Transform transform) {

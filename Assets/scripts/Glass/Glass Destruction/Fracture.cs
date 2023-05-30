@@ -16,6 +16,7 @@ public class Fracture : MonoBehaviour {
 
 
     [SerializeField] public HitZoneType hitZoneType = HitZoneType._2by2;
+    [SerializeField] public AttachmentType attachmentType = AttachmentType.TOP;
 
     /// <summary>
     /// Collector object that stores the produced fragments
@@ -80,7 +81,7 @@ public class Fracture : MonoBehaviour {
                 this.fragmentRoot.transform.localScale = Vector3.one;
 
                 BrokenGlass bg = fragmentRoot.AddComponent<BrokenGlass>();
-                bg.Init(hitZoneType);
+                bg.Init(hitZoneType, attachmentType);
             }
 
             var fragmentTemplate = CreateFragmentTemplate();

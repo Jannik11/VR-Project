@@ -8,23 +8,22 @@ public class BrokenGlass : MonoBehaviour {
 
     // Start is called before the first frame update
     public void Start() {
-        Vector3 center = transform.position;
-
-        hitZoneSplit = new Split2by2();
-        hitZoneSplit.Split(center, transform);
+        hitZoneSplit.Split(transform);
     }
-    
-    public void Init(HitZoneType hitZoneType) {
 
-        /*switch (hitZoneType) {
+    public void Init(HitZoneType hitZoneType, AttachmentType attachmentType) {
+
+        switch (hitZoneType) {
             case HitZoneType._2by2:
 
-                hitZoneSplit = new Split2by2();
+                hitZoneSplit = new Split2by2(attachmentType);
 
                 break;
             case HitZoneType._1by3:
+
+                hitZoneSplit = new Split1by3(attachmentType);
                 break;
-        }*/
+        }
     }
 
 
@@ -42,7 +41,7 @@ public class BrokenGlass : MonoBehaviour {
             rb.isKinematic = false;
             rb.detectCollisions = true;
 
-            rb.velocity = new Vector3(Random.Range(-2.0f, 2.0f), Random.Range(-2.0f, 2.0f), Random.Range(5.0f, 10.0f) * (1.0f - (Vector3.Distance(hitPoint, fragCenter) / 5.0f)) );
+            rb.velocity = new Vector3(Random.Range(-2.0f, 2.0f), Random.Range(-2.0f, 2.0f), Random.Range(5.0f, 10.0f) * (1.0f - (Vector3.Distance(hitPoint, fragCenter) / 5.0f)));
         }
 
     }

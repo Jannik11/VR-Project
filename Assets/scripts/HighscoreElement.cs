@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [Serializable]
-public class HighscoreElement
-{
+public class HighscoreElement {
     public string date;
     public float score;
 

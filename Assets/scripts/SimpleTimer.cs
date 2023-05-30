@@ -30,6 +30,6 @@ public class SimpleTimer : MonoBehaviour {
         running = false;
         float toReturn = Timer;
         Timer = 0.0f;
-        return toReturn;
+        return Mathf.Round(toReturn * 100) / 100.0f;
     }
 }

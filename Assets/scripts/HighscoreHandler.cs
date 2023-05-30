@@ -5,11 +5,14 @@ using UnityEngine;
 
 public class HighscoreHandler : MonoBehaviour {
     [SerializeField] private SimpleTimer timer;
-    private List<HighscoreElement> _highscoreElements = new List<HighscoreElement>();
-    [SerializeField] int maxHighscores = 7;
+    private List<HighscoreElement> highscoreElements = new List<HighscoreElement>();
+    [SerializeField] int maxHighscores = 5;
     [SerializeField] string filename;
+    [SerializeField] HighscoreUi highscoreUi;
 
     private void Start() {
+        LoadHighscore();
+        highscoreUi.UpdateUI(highscoreElements);
     }
 
     public void ResumeTimer() {
@@ -21,20 +24,17 @@ public class HighscoreHandler : MonoBehaviour {
     }
 
     public float EndGame() {
-        Debug.Log("spiel wird beendet");
         float score = timer.EndTimer();
-        string date = "";
-        AddHighscoreIfPossible(new HighscoreElement(date, score));
-        SaveHighscore();
+        string date = System.DateTime.Now.ToString();
+        bool newScore = AddHighscoreIfPossible(new HighscoreElement(date, score));
+        highscoreUi.UpdateUI(highscoreElements);
         return score;
     }
 
-
-
     private void LoadHighscore() {
-        _highscoreElements = FileHandler.ReadListFromJSON<HighscoreElement>(filename);
-        while (_highscoreElements.Count > maxHighscores) {
-            _highscoreElements.RemoveAt(maxHighscores);
+        highscoreElements = FileHandler.ReadListFromJSON<HighscoreElement>(filename);
+        while (highscoreElements.Count > maxHighscores) {
+            highscoreElements.RemoveAt(maxHighscores);
         }
     }
 
@@ -43,21 +43,27 @@ public class HighscoreHandler : MonoBehaviour {
     }
 
     private void SaveHighscore() {
-        FileHandler.SaveToJSON<HighscoreElement>(_highscoreElements, filename);
+        FileHandler.SaveToJSON<HighscoreElement>(highscoreElements, filename);
     }
 
-    public void AddHighscoreIfPossible(HighscoreElement element) {
+    public bool AddHighscoreIfPossible(HighscoreElement element) {
+        Boolean added = false;
+        Debug.Log("AddHighscoreIfPossible: ");
         for (int i = 0; i < maxHighscores; i++) {
-            if (i >= _highscoreElements.Count || element.score > _highscoreElements[i].score) {
-                _highscoreElements.Insert(i, element);
-                while (_highscoreElements.Count > maxHighscores) {
-                    _highscoreElements.RemoveAt(maxHighscores);
+            if (i >= highscoreElements.Count || element.score > highscoreElements[i].score) {
+                added = true;
+                highscoreElements.Insert(i, element);
+                while (highscoreElements.Count > maxHighscores) {
+                    highscoreElements.RemoveAt(maxHighscores);
+                }
+                Debug.Log("AddHighscoreIfPossible: jetzt speicher ich");
+                foreach(HighscoreElement e in highscoreElements) {
+                    Debug.Log("ich speicher jetzt element" + e.date + "Score" + e.score);
                 }
                 SaveHighscore();
                 break;
             }
-
-
         }
+        return added;
     }
 }

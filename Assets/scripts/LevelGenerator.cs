@@ -41,13 +41,13 @@ public class LevelGenerator : MonoBehaviour {
     private void GenerateLevel() {
         for (int i = 0; i < chunksToLoad; i++) {
             int idx = UnityEngine.Random.Range(0, targets.Length);
-            spawnedTargets.Add(Instantiate<Transform>(targets[idx], new Vector3(0, 0, chunkSize * i), Quaternion.identity));
+            spawnedTargets.Add(Instantiate<Transform>(targets[idx], new Vector3(0, 0, chunkSize * i + chunkSize), Quaternion.identity));
         }
     }
 
     private void EndGame() {
         foreach (Transform transform in spawnedTargets) {
-            Destroy(transform);
+            Destroy(transform.gameObject);
         }
         spawnedTargets = new List<Transform>();
         GenerateLevel();

@@ -25,8 +25,6 @@ public class Split1by3 : HitZoneSplit {
         topBorderY = mr.bounds.max.y - sectionHeightY;
         botBorderY = mr.bounds.min.y + sectionHeightY;
 
-        Debug.Log(topBorderY + " " + botBorderY);
-
         foreach (Transform fragment in fragmentParent) {
 
             Vector3 fragCenter = fragment.GetComponent<MeshRenderer>().bounds.center;

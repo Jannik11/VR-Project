@@ -57,15 +57,16 @@ public class Fracture : MonoBehaviour {
     void OnCollisionEnter(Collision collision) {
         Debug.Log("Collision contactCount: " + collision.contactCount + " Collision.body: " + collision.body);
         if (collision.contactCount > 0 && collision.body != null &&collision.body.CompareTag("Arrow")) {
-            this.ComputeFracture();
+            this.ComputeFracture(collision.GetContact(0).point);
         }
+
     }
 
     /// <summary>
     /// Compute the fracture and create the fragments
     /// </summary>
     /// <returns></returns>
-    private void ComputeFracture() {
+    private void ComputeFracture(Vector3 hitPoint) {
         var mesh = this.GetComponent<MeshFilter>().sharedMesh;
 
         if (mesh != null) {
@@ -80,8 +81,6 @@ public class Fracture : MonoBehaviour {
                 this.fragmentRoot.transform.rotation = this.transform.rotation;
                 this.fragmentRoot.transform.localScale = Vector3.one;
 
-                BrokenGlass bg = fragmentRoot.AddComponent<BrokenGlass>();
-                bg.Init(hitZoneType, attachmentType, transform);
             }
 
             var fragmentTemplate = CreateFragmentTemplate();
@@ -96,6 +95,9 @@ public class Fracture : MonoBehaviour {
 
             // Deactivate the original object
             this.gameObject.SetActive(false);
+
+            BrokenGlass bg = fragmentRoot.AddComponent<BrokenGlass>();
+            bg.Init(hitZoneType, attachmentType, transform, hitPoint);
         }
     }
 

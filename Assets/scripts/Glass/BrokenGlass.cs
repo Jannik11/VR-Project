@@ -9,10 +9,9 @@ public class BrokenGlass : MonoBehaviour {
 
     // Start is called before the first frame update
     public void Start() {
-        hitZoneSplit.Split(transform, originalGlass);
     }
 
-    public void Init(HitZoneType hitZoneType, AttachmentType attachmentType, Transform originalGlass) {
+    public void Init(HitZoneType hitZoneType, AttachmentType attachmentType, Transform originalGlass, Vector3 hitPoint) {
 
         this.originalGlass = originalGlass;
 
@@ -27,11 +26,13 @@ public class BrokenGlass : MonoBehaviour {
                 hitZoneSplit = new Split1by3(attachmentType);
                 break;
         }
+
+        hitZoneSplit.Split(transform, originalGlass);
+        RegisterHit(hitPoint);
     }
 
 
     public void RegisterHit(Vector3 hitPoint) {
-        Vector3 center = transform.position;
         List<Transform> someList = hitZoneSplit.RegisterHit(hitPoint, transform);
 
         foreach (Transform fragment in someList) {

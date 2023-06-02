@@ -19,6 +19,7 @@ public class SoundEffects : MonoBehaviour
 
     private void PlayGlasBreakingSound(int ignored1, Collider ignored2)
     {
+        Debug.Log("ICH BIN GETRIGGERT! :(");
         audioSrc.clip = glassBreakingSounds[UnityEngine.Random.Range(0, glassBreakingSounds.Length)];
         audioSrc.Play();
     }

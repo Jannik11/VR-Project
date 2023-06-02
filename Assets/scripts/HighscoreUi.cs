@@ -12,6 +12,9 @@ public class HighscoreUi : MonoBehaviour {
     List<GameObject> uiElements = new List<GameObject>();
 
     public void UpdateUI(List<HighscoreElement> scores) {
+        //while (scoresParent.transform.childCount > 0) {
+        //    GameObject.Destroy(scoresParent.transform.GetChild(0));
+       // }
         for (int i = 0; i < scores.Count; i++) {
             HighscoreElement el = scores[i];
             GameObject inst;

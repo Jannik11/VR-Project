@@ -6,7 +6,15 @@ using UnityEngine;
 public class LevelGenerator : MonoBehaviour {
 
 
-    [SerializeField] Transform[] targets;
+    //[SerializeField] Transform[] targets;
+
+
+    [SerializeField] LevelSO[] levels;
+
+
+    [SerializeField] int lvlSize = 6;
+    private int currLevel = 0;
+    private int currElementsInLvl = 1;
 
     Transform instantiated;
 
@@ -38,15 +46,31 @@ public class LevelGenerator : MonoBehaviour {
 
     void GenerateLevel() {
         for (int i = 0; i < chunksToLoad; i++) {
-            int idx = UnityEngine.Random.Range(0, targets.Length);
-            spawnedTargets.Add(Instantiate<Transform>(targets[idx], new Vector3(0, 0, chunkSize * (i + 3)), Quaternion.identity));
+            generateTarget(i);
+        }
+    }
+
+    private void generateTarget(int i) {
+        bool lastLevel = currLevel >= levels.Length - 1;
+        Debug.Log("currElementsInLvl > lvlSize: " + (currElementsInLvl > lvlSize));
+        Debug.Log("lastLevel " + lastLevel);
+        if (currElementsInLvl > lvlSize && !lastLevel) { //nicht endlosLevel und Level ist voll also Level-Trenner
+            Debug.Log("Hello warum");
+            currElementsInLvl = 0;
+            currLevel++;
+            spawnedTargets.Add(Instantiate<Transform>(levels[currLevel].GetSeperator(), new Vector3(0, 0, chunkSize * (i + 2)), Quaternion.identity));
+        } else {
+            currElementsInLvl++;
+            spawnedTargets.Add(Instantiate<Transform>(levels[currLevel].GetTarget(), new Vector3(0, 0, chunkSize * (i + 2)), Quaternion.identity));
         }
     }
 
     public void ResetLevel() {
-        for(int i = 0; i < spawnedTargets.Count; i++) {
+        for (int i = 0; i < spawnedTargets.Count; i++) {
             Destroy(spawnedTargets[i].gameObject);
         }
+        currLevel = 0;
+        currElementsInLvl = 0;
         spawnedTargets = new List<Transform>();
         distanceTraveled = 0.0f;
         actualSpeed = speed;
@@ -54,7 +78,6 @@ public class LevelGenerator : MonoBehaviour {
     }
 
     public void StartGame() {
-        Debug.Log("ich starte das Spiel Generator");
         GenerateLevel();
         running = true;
     }
@@ -79,7 +102,8 @@ public class LevelGenerator : MonoBehaviour {
                 Destroy(spawnedTargets[0].gameObject);
                 spawnedTargets.RemoveAt(0);
                 distanceTraveled = 0;
-                spawnedTargets.Add(Instantiate<Transform>(targets[UnityEngine.Random.Range(0, targets.Length)], new Vector3(0, 0, chunkSize * (chunksToLoad - 1)), Quaternion.identity));
+                generateTarget(chunksToLoad - 1);
+                //spawnedTargets.Add(Instantiate<Transform>(targets[UnityEngine.Random.Range(0, targets.Length)], new Vector3(0, 0, chunkSize * (chunksToLoad - 1)), Quaternion.identity));
             }
             foreach (Transform target in spawnedTargets) {
                 target.transform.Translate(new Vector3(0, 0, distance));

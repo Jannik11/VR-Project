@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         EventManager.current.OnBowGrab += BowGrabbed;
-        EventManager.current.OnGamePause += BowReleased;
+        EventManager.current.OnBowRelease += BowReleased;
 
         EventManager.current.OnPlayerDeath += EndGame;
         EventManager.current.OnPlayerHit += PlayerHit;

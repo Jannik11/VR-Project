@@ -90,11 +90,14 @@ public class Arrow : MonoBehaviour {
     }
 
     private void OnCollisionEnter(Collision collision) {
-
-        if (collision.collider.CompareTag("Quiver") || collision.collider.CompareTag("String") || collision.collider.CompareTag("Glass")) {
+        Debug.Log("OnCollisionEnter triggered");
+        if (collision.collider.CompareTag("Quiver") || collision.collider.CompareTag("String")) {
             return;
         }
-        
+        if (collision.collider.CompareTag("Glass")) {
+            EventManager.current.TriggerOnArrowHitGlass();
+        }
+
         if (ArrowState == ArrowState.FLYING) {
             EventManager.current.TriggerOnArrowHit(id, collision.collider);
         }

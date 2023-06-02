@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour {
 
     void BowGrabbed(Side ignored) {
         highscoreHandler.ResumeTimer();
-        livesGui.UpdateLives(startLives);
+        livesGui.UpdateLives(currLives);
         livesGui.StartGame();
 
         Debug.Log("bin ich pausiert: " + paused);
@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour {
         score.text = endScore.ToString();
         livesGui.EndGame();
         levelGenerator.ResetLevel();
+        currLives = startLives;
     }
     void PlayerHit() {
         currLives--;

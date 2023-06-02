@@ -57,6 +57,14 @@ public class EventManager : MonoBehaviour
             OnArrowHit(id, collider);
         }
     } 
+    public event Action OnArrowHitGlass;
+    public void TriggerOnArrowHitGlass()
+    {
+        if (OnArrowHitGlass != null)
+        {
+            OnArrowHitGlass();
+        }
+    } 
 
     #endregion
 

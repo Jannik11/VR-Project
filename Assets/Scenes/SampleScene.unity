@@ -5341,7 +5341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba492465ee32a2640b37d98f04a92048, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startLives: 1
+  startLives: 3
   highscoreHandler: {fileID: 1200302664}
   score: {fileID: 1741990973}
   livesGui: {fileID: 1904743407}
@@ -5830,7 +5830,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSrc: {fileID: 1032600556}
   arrowShootSound: {fileID: 8300000, guid: ac0b1c798fa3316489b768d8ea0cedc4, type: 3}
-  glassBreakingSounds: []
+  glassDebug: {fileID: 8300000, guid: a87be3115d7b68e4c89bceb7c2bf5697, type: 3}
+  glassBreakingSounds:
+  - {fileID: 8300000, guid: b57d05aab4f367247bc96d24dad2ae19, type: 3}
+  - {fileID: 8300000, guid: f24a2a6bf489a4248be604c85b70abfc, type: 3}
+  - {fileID: 8300000, guid: 2ff7f0ba3be236d43ab4f35b672cd0a1, type: 3}
+  - {fileID: 8300000, guid: a87be3115d7b68e4c89bceb7c2bf5697, type: 3}
+  - {fileID: 8300000, guid: b0118314cda51cb42b97e40dc692c499, type: 3}
 --- !u!4 &1470115907
 Transform:
   m_ObjectHideFlags: 0

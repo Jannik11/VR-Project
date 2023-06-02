@@ -8,18 +8,19 @@ public class SoundEffects : MonoBehaviour
     [SerializeField] AudioSource audioSrc;
 
     [SerializeField] AudioClip arrowShootSound;
+    [SerializeField] AudioClip glassDebug;
     [SerializeField] AudioClip[] glassBreakingSounds;
+
 
     // Start is called before the first frame update
     void Start()
     {
         EventManager.current.OnArrowShoot += PlayArrowShootSound;
-        EventManager.current.OnArrowHit += PlayGlasBreakingSound;
+        EventManager.current.OnArrowHitGlass += PlayGlasBreakingSound;
     }
 
-    private void PlayGlasBreakingSound(int ignored1, Collider ignored2)
+    private void PlayGlasBreakingSound()
     {
-        Debug.Log("ICH BIN GETRIGGERT! :(");
         audioSrc.clip = glassBreakingSounds[UnityEngine.Random.Range(0, glassBreakingSounds.Length)];
         audioSrc.Play();
     }

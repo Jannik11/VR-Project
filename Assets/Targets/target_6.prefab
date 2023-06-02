@@ -276,7 +276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fractureOptions:
-    fragmentCount: 30
+    fragmentCount: 100
     xAxis: 1
     yAxis: 1
     zAxis: 0

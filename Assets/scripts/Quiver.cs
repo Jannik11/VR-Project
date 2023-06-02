@@ -24,7 +24,6 @@ public class Quiver : MonoBehaviour {
 
 
     private void Update() {
-        Debug.Log("CurrentArrow in Quiver: " + CurrentArrow);
     }
     private void Awake() {
         instance = this;

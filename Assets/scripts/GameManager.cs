@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour {
         running = true;
         highscoreHandler.ResumeTimer();
         livesGui.UpdateLives(startLives);
+        livesGui.StartGame();
     }
 
     void PauseGame() {
@@ -41,7 +42,7 @@ public class GameManager : MonoBehaviour {
     void PlayerHit() {
         currLives--;
         livesGui.UpdateLives(currLives);
-        if(currLives <= 0) {
+        if (currLives <= 0) {
             EventManager.current.TriggerOnGameEnd();
         }
     }

@@ -38,28 +38,28 @@ public class LevelGenerator : MonoBehaviour {
         GenerateLevel();
     }
 
-    private void GenerateLevel() {
+    void GenerateLevel() {
         for (int i = 0; i < chunksToLoad; i++) {
             int idx = UnityEngine.Random.Range(0, targets.Length);
             spawnedTargets.Add(Instantiate<Transform>(targets[idx], new Vector3(0, 0, chunkSize * i + chunkSize), Quaternion.identity));
         }
     }
 
-    private void EndGame() {
-        foreach (Transform transform in spawnedTargets) {
-            Destroy(transform.gameObject);
+    void EndGame() {
+        for(int i = 0; i < spawnedTargets.Count; i++) {
+            Destroy(spawnedTargets[i].gameObject);
         }
         spawnedTargets = new List<Transform>();
-        GenerateLevel();
         distanceTraveled = 0.0f;
         actualSpeed = speed;
     }
 
-    private void StartGame() {
+    void StartGame() {
         running = true;
+        GenerateLevel();
     }
 
-    private void PauseGame() {
+    void PauseGame() {
         running = false;
     }
 

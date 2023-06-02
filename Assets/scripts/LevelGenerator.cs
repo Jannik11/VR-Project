@@ -26,45 +26,46 @@ public class LevelGenerator : MonoBehaviour {
 
     [SerializeField] int chunkSize;
 
+    [SerializeField] float despawnPointZ;
+
     private bool running = false;
 
 
     // Start is called before the first frame update
     void Start() {
         actualSpeed = speed;
-        EventManager.current.OnGamePause += PauseGame;
-        EventManager.current.OnGameStart += StartGame;
-        EventManager.current.OnGameEnd += EndGame;
-        GenerateLevel();
     }
 
     void GenerateLevel() {
         for (int i = 0; i < chunksToLoad; i++) {
             int idx = UnityEngine.Random.Range(0, targets.Length);
-            spawnedTargets.Add(Instantiate<Transform>(targets[idx], new Vector3(0, 0, chunkSize * i + chunkSize), Quaternion.identity));
+            spawnedTargets.Add(Instantiate<Transform>(targets[idx], new Vector3(0, 0, chunkSize * (i + 3)), Quaternion.identity));
         }
     }
 
-    void EndGame() {
+    public void ResetLevel() {
         for(int i = 0; i < spawnedTargets.Count; i++) {
             Destroy(spawnedTargets[i].gameObject);
         }
         spawnedTargets = new List<Transform>();
         distanceTraveled = 0.0f;
         actualSpeed = speed;
-    }
-
-    void StartGame() {
-        running = true;
-        GenerateLevel();
-    }
-
-    void PauseGame() {
         running = false;
     }
 
+    public void StartGame() {
+        Debug.Log("ich starte das Spiel Generator");
+        GenerateLevel();
+        running = true;
+    }
 
+    public void PauseGame() {
+        running = false;
+    }
 
+    public void ResumeGame() {
+        running = true;
+    }
 
 
     // Update is called once per frame
@@ -74,7 +75,7 @@ public class LevelGenerator : MonoBehaviour {
             float distance = -actualSpeed * Time.deltaTime;
             distanceTraveled += distance;
 
-            if (Math.Abs(distanceTraveled) > chunkSize) {
+            if (spawnedTargets[0].position.z < despawnPointZ) {
                 Destroy(spawnedTargets[0].gameObject);
                 spawnedTargets.RemoveAt(0);
                 distanceTraveled = 0;

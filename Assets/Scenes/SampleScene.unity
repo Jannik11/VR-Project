@@ -263,9 +263,10 @@ MonoBehaviour:
   - {fileID: 149763188885555287, guid: b3a441927270fd24eaadedd7315dae79, type: 3}
   - {fileID: 2538826553959620325, guid: ae269196724bcac47921e61e21f48502, type: 3}
   speed: 5
-  speedIncrease: 1
+  speedIncrease: 0.0001
   chunksToLoad: 10
-  chunkSize: 15
+  chunkSize: 25
+  despawnPointZ: -3
 --- !u!4 &112953096
 Transform:
   m_ObjectHideFlags: 0
@@ -2235,6 +2236,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 993870170427469403, guid: bee294d416a42994d98265e6efa2ee95, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 15cb448952202254c90a2496653a3db3, type: 2}
     - target: {fileID: 1072452413331701960, guid: bee294d416a42994d98265e6efa2ee95, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -2551,6 +2556,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: fences
       objectReference: {fileID: 0}
+    - target: {fileID: 7902402958248958035, guid: bee294d416a42994d98265e6efa2ee95, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 15cb448952202254c90a2496653a3db3, type: 2}
     - target: {fileID: 7909402093378941252, guid: bee294d416a42994d98265e6efa2ee95, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -2774,6 +2783,7 @@ GameObject:
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
   - component: {fileID: 963194230}
+  - component: {fileID: 963194231}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2940,6 +2950,20 @@ MonoBehaviour:
   m_TrackingType: 0
   m_UpdateType: 0
   m_UseRelativeTransform: 0
+--- !u!114 &963194231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57b6c87263e5639408ca6fc1ef1fac1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeDuration: 1
+  shakeAmount: 0.7
 --- !u!1 &975789098
 GameObject:
   m_ObjectHideFlags: 0
@@ -3093,7 +3117,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1049257013
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4455,6 +4479,7 @@ MonoBehaviour:
   highscoreHandler: {fileID: 1200302664}
   score: {fileID: 1741990973}
   livesGui: {fileID: 1904743407}
+  levelGenerator: {fileID: 112953095}
 --- !u!1 &1336432771
 GameObject:
   m_ObjectHideFlags: 0

@@ -67,7 +67,6 @@ public class Bow : MonoBehaviour {
             BowState = BowState.IDLE;
         } else if (arg0.m_selectedObject.CompareTag("Bow")) {
             EventManager.current.TriggerOnBowRelease();
-            EventManager.current.TriggerOnGamePause();
         }
     }
 
@@ -87,8 +86,6 @@ public class Bow : MonoBehaviour {
             } else if (arg0.m_side == VG_HandSide.LEFT) {
                 EventManager.current.TriggerOnBowGrab(Side.LEFT);
             }
-            Debug.Log("Trigger Event Start");
-            EventManager.current.TriggerOnGameStart();
         }
     }
 

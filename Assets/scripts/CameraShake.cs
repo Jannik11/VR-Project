@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CameraShake : MonoBehaviour {
     // Camera Information
-    public Transform cameraTransform;
     private Vector3 orignalCameraPos;
 
     // Shake Parameters
@@ -17,7 +16,7 @@ public class CameraShake : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        orignalCameraPos = cameraTransform.localPosition;
+        orignalCameraPos = transform.localPosition;
     }
 
     // Update is called once per frame
@@ -34,12 +33,12 @@ public class CameraShake : MonoBehaviour {
 
     private void StartCameraShakeEffect() {
         if (_shakeTimer > 0) {
-            cameraTransform.localPosition = orignalCameraPos + Random.insideUnitSphere * shakeAmount;
+            transform.localPosition = orignalCameraPos + Random.insideUnitSphere * shakeAmount;
             _shakeTimer -= Time.deltaTime;
         }
         else {
             _shakeTimer = 0f;
-            cameraTransform.position = orignalCameraPos;
+            transform.position = orignalCameraPos;
             canShake = false;
         }
     }

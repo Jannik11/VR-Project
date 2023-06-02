@@ -85,6 +85,7 @@ public class EventManager : MonoBehaviour
         }
     }
 
+
     public event Action OnBowRelease;
     public void TriggerOnBowRelease() {
         if (OnBowRelease != null) {
@@ -101,12 +102,21 @@ public class EventManager : MonoBehaviour
         {
             OnGameStart();
         }
-    } 
-    public event Action OnGameEnd;
-    public void TriggerOnGameEnd() {
-        if (OnGameEnd != null)
+    }   
+    
+    public event Action OnGameResume;
+    public void TriggerOnGameResume() {
+        if (OnGameResume != null)
         {
-            OnGameEnd();
+            OnGameResume();
+        }
+    } 
+
+    public event Action OnPlayerDeath;
+    public void TriggerOnPlayerDeath() {
+        if (OnPlayerDeath != null)
+        {
+            OnPlayerDeath();
         }
     }   
     public event Action OnGamePause;

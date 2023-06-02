@@ -54,7 +54,6 @@ public class Arrow : MonoBehaviour {
     }
 
     public void NockArrow() {
-        Debug.Log("ArrowNock: Arrow");
 
         EventManager.current.OnArrowNock -= NockArrow;
         ArrowState = ArrowState.INBOW;
@@ -64,7 +63,6 @@ public class Arrow : MonoBehaviour {
     }
 
     public void ShootArrow() {
-        Debug.Log("ArrowShoot: Arrow");
 
         EventManager.current.OnArrowShoot -= ShootArrow;
         ArrowState = ArrowState.FLYING;
@@ -84,22 +82,11 @@ public class Arrow : MonoBehaviour {
     public void ArrowHit(int id, Collider collider) {
         if (id != this.id || ArrowState != ArrowState.FLYING) {
             return;
-        }
-
-        Debug.Log("ArrowHit: Arrow");
+        };
 
         EventManager.current.OnArrowHit -= ArrowHit;
-        ArrowState = ArrowState.STICKING;
 
-        rb.useGravity = false;
-        rb.isKinematic = true;
-        rb.detectCollisions = false;
-
-        if (collider.attachedRigidbody != null) {
-            transform.SetParent(collider.attachedRigidbody.transform, true);
-        }
-
-        Destroy(this);
+        Destroy(gameObject);
     }
 
     private void OnCollisionEnter(Collision collision) {

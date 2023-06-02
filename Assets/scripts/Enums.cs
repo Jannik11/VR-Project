@@ -7,7 +7,7 @@ public enum BowState {
 }
 
 public enum ArrowState {
-    INHAND, INBOW, FLYING, STICKING, NONE
+    INHAND, INBOW, FLYING, NONE
 }
 
 public enum HandState {

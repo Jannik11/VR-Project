@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 609943741541446242}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: target_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 4821902839513577084}
   - component: {fileID: 777710592381101977}
   - component: {fileID: 3820042591269533778}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Glass
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 6695927698462530775}
   - component: {fileID: 8069445885713217598}
   - component: {fileID: 7208149792570339336}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

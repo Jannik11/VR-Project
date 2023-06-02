@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 149763188885555287}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: target_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 3112700271871277292}
   - component: {fileID: 4639735227296137608}
   - component: {fileID: 7319628146255937026}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9090667979110436930}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: PivotPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 5299401814892798869}
   - component: {fileID: 7195032249622795653}
   - component: {fileID: 7648243318071025101}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Glass
   m_TagString: Glass
   m_Icon: {fileID: 0}

@@ -27,7 +27,7 @@ public class ObstacleMovementRapidHorizontal : MonoBehaviour
         currInterval = (intervalCount - 1) / 2;
         transform.position = new Vector3(left + currInterval * num, transform.position.y, transform.position.z);
 
-        for (int i = 0; i < intervalCount + 1; i++)
+        for (int i = 0; i < intervalCount; i++)
         {
             intervalPositions[i] = left + i * num;
         }

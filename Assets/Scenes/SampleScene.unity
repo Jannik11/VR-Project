@@ -262,8 +262,8 @@ MonoBehaviour:
   - {fileID: 6668633688379262312, guid: 40096b2967af08c49b141a91f0d95f02, type: 3}
   - {fileID: 149763188885555287, guid: b3a441927270fd24eaadedd7315dae79, type: 3}
   - {fileID: 2538826553959620325, guid: ae269196724bcac47921e61e21f48502, type: 3}
-  speed: 2
-  speedIncrease: 0
+  speed: 5
+  speedIncrease: 1
   chunksToLoad: 10
   chunkSize: 15
 --- !u!4 &112953096

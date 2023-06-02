@@ -19,7 +19,7 @@ public class ObstableMovementHorizontal : MonoBehaviour {
     void Update() {
         float movement = (movementAlternater ? speed : -speed) * Time.deltaTime;
         transform.Translate(new Vector3(movement, 0, 0));
-        if (transform.position.x > right || transform.position.x < left) {
+        if ((movementAlternater && transform.position.x > right) || (!movementAlternater && transform.position.x < left)) {
             movementAlternater = !movementAlternater;
         }
     }

@@ -49,7 +49,7 @@ public class ObstacleMovementLinkedVertical : MonoBehaviour
         topTargetY += movement;
         bottomTargetY += movement;
 
-        if (topTargetY > topMaxDistance || bottomTargetY < bottomMaxDistance)
+        if ((movementAlternater && topTargetY > topMaxDistance) || (!movementAlternater && bottomTargetY < bottomMaxDistance))
         {
             movementAlternater = !movementAlternater;
         }

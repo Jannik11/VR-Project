@@ -155,7 +155,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6061822030767500975}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.7, z: 0}
+  m_LocalPosition: {x: 0, y: -3.85, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -192,8 +192,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6546769127568024213}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -3.7, z: 5.3}
-  m_LocalScale: {x: 10, y: 10, z: 0.29999998}
+  m_LocalPosition: {x: 0, y: -3.7, z: 4}
+  m_LocalScale: {x: 8, y: 8, z: 0.29999998}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 149763188885555287}
@@ -275,7 +275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 100
-  triggerDistance: 40
+  triggerDistance: 25
   playerPosZ: 0
   finalTransform: {fileID: 9090667979110436930}
 --- !u!54 &7195032249622795653
@@ -315,5 +315,5 @@ MonoBehaviour:
     textureScale: {x: 1, y: 1}
     textureOffset: {x: 0, y: 0}
   currentRefractureCount: 0
-  hitZoneType: 2
+  hitZoneType: 0
   attachmentType: 2

@@ -161,7 +161,7 @@ Transform:
   m_GameObject: {fileID: 3893259639006850142}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.4, z: 0}
-  m_LocalScale: {x: 6, y: 10, z: 0.29999998}
+  m_LocalScale: {x: 5, y: 10, z: 0.29999998}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6668633688379262312}
@@ -284,5 +284,5 @@ MonoBehaviour:
     textureScale: {x: 1, y: 1}
     textureOffset: {x: 0, y: 0}
   currentRefractureCount: 0
-  hitZoneType: 2
+  hitZoneType: 1
   attachmentType: 0

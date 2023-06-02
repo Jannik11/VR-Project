@@ -49,7 +49,7 @@ public class ObstacleMovementLinkedHorizontal : MonoBehaviour
         leftTargetX += movement;
         rightTargetX += movement;
 
-        if (rightTargetX > rightMaxDistance || leftTargetX < leftMaxDistance)
+        if ((movementAlternater && rightTargetX > rightMaxDistance) || (!movementAlternater && leftTargetX < leftMaxDistance))
         {
             movementAlternater = !movementAlternater;
         }

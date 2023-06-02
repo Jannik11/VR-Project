@@ -165,7 +165,7 @@ MonoBehaviour:
   topMaxDistance: 7.5
   bottomMaxDistance: -7.5
   distanceBetweenTargets: 6
-  speed: 5
+  speed: 4
   topTarget: {fileID: 1827295232293228217}
   bottomTarget: {fileID: 2867375251050221181}
 --- !u!1 &6912156271197811522

@@ -12,14 +12,14 @@ public class ObstableMovementVertical : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         movementAlternater = Random.Range(0, 2) == 0;
-        transform.position = new Vector3(0, Random.Range(bottom,top), transform.position.z);
+        transform.position = new Vector3(transform.position.x, Random.Range(bottom,top), transform.position.z);
     }
 
     // Update is called once per frame
     void Update() {
         float movement = (movementAlternater ? speed : -speed) * Time.deltaTime;
         transform.Translate(new Vector3(0, movement, 0));
-        if (transform.position.y > top || transform.position.y < bottom) {
+        if ((movementAlternater && transform.position.y > top) || (!movementAlternater && transform.position.y < bottom)) {
             movementAlternater = !movementAlternater;
         }
     }

@@ -74,7 +74,7 @@ public class Fracture : MonoBehaviour {
             if (this.fragmentRoot == null) {
                 // Create a game object to contain the fragments
                 this.fragmentRoot = new GameObject($"{this.name}Fragments");
-                this.fragmentRoot.transform.SetParent(this.transform.parent);
+                this.fragmentRoot.transform.SetParent(this.transform);
 
                 // Each fragment will handle its own scale
                 this.fragmentRoot.transform.position = this.transform.position;
@@ -95,6 +95,8 @@ public class Fracture : MonoBehaviour {
 
             // Deactivate the original object
             this.gameObject.SetActive(false);
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.GetComponent<BoxCollider>().enabled = false;
 
             BrokenGlass bg = fragmentRoot.AddComponent<BrokenGlass>();
             bg.Init(hitZoneType, attachmentType, transform, hitPoint);

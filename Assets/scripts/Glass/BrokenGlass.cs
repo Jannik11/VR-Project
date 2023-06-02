@@ -50,6 +50,8 @@ public class BrokenGlass : MonoBehaviour {
             rb.detectCollisions = true;
 
             rb.AddForce(new Vector3(Random.Range(-2.0f, 2.0f), Random.Range(-2.0f, 2.0f), Random.Range(5.0f, 10.0f) * (1.0f - (Vector3.Distance(hitPoint, fragCenter) / 5.0f))));
+
+            Destroy(gameObject, 30.0f);
         }
 
     }

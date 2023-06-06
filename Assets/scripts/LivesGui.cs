@@ -8,7 +8,7 @@ public class LivesGui : MonoBehaviour {
     [SerializeField] TextMeshProUGUI livesText;
     [SerializeField] GameObject gameOverGrafik;
     public void UpdateLives(int lives) {
-        livesText.text = "Du hast noch " + lives + "Leben";
+        livesText.text = "Du hast noch " + lives + " Leben";
     }
 
     public void EndGame() {

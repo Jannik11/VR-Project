@@ -11,11 +11,15 @@ public class GameManager : MonoBehaviour {
     [SerializeField] TextMeshProUGUI score;
     [SerializeField] LivesGui livesGui;
     [SerializeField] LevelGenerator levelGenerator;
+    [SerializeField] float immuneTime;
 
     private int currLives;
 
     private bool paused = false;
     private bool activeGame = false;
+
+    private float currImmuneTime = 0.0f;
+
     // Start is called before the first frame update
     void Start() {
         EventManager.current.OnBowGrab += BowGrabbed;
@@ -24,6 +28,8 @@ public class GameManager : MonoBehaviour {
         EventManager.current.OnPlayerDeath += EndGame;
         EventManager.current.OnPlayerHit += PlayerHit;
         currLives = startLives;
+
+        Debug.Log("CURRLIVES: " + currLives);
     }
 
     private void BowReleased() {
@@ -60,10 +66,13 @@ public class GameManager : MonoBehaviour {
         currLives = startLives;
     }
     void PlayerHit() {
-        currLives--;
-        livesGui.UpdateLives(currLives);
-        if (currLives <= 0) {
-            EventManager.current.TriggerOnPlayerDeath();
+        if(currImmuneTime <= 0.0f) {
+            currLives--;
+            currImmuneTime = immuneTime;
+            livesGui.UpdateLives(currLives);
+            if (currLives <= 0) {
+                EventManager.current.TriggerOnPlayerDeath();
+            }
         }
     }
 
@@ -72,5 +81,7 @@ public class GameManager : MonoBehaviour {
         if(!paused && activeGame) { 
             score.text = highscoreHandler.GetScore().ToString();
         }
+
+        currImmuneTime -= Time.deltaTime;
     }
 }

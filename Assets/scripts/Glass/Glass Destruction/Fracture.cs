@@ -94,7 +94,11 @@ public class Fracture : MonoBehaviour {
             GameObject.Destroy(fragmentTemplate);
 
             // Deactivate the original object
-            this.gameObject.SetActive(false);
+            //this.gameObject.SetActive(false);
+            GetComponent<MeshRenderer>().enabled = false;
+            GetComponent<BoxCollider>().enabled = false;
+
+            fragmentRoot.transform.parent = transform;
 
             BrokenGlass bg = fragmentRoot.AddComponent<BrokenGlass>();
             bg.Init(hitZoneType, attachmentType, transform, hitPoint);

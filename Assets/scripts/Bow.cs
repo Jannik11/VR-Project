@@ -40,16 +40,18 @@ public class Bow : MonoBehaviour {
 
     }
 
-
-    // Update is called once per frame
-    void Update() {
-
+    private void FixedUpdate() {
         if (stringGrabbed) {
             mid.localPosition = new Vector3(Mathf.Clamp(mid.localPosition.x, midDefaultOffset, 60.0f), transform.position.y, transform.position.z);
 
         } else {
             mid.localPosition = new Vector3(midDefaultOffset, transform.position.y, transform.position.z);
-        }
+        }        
+    }
+
+
+    // Update is called once per frame
+    void Update() {
 
         Vector3[] positions = new Vector3[] { top.position, mid.position, bot.position };
         lineRenderer.SetPositions(positions);
@@ -97,6 +99,8 @@ public class Bow : MonoBehaviour {
 
     private void ShootArrow() {
         Debug.Log("Arrowshoot: Bow");
+
+        Debug.Log("ARROW DEBUG: MID " + mid.position);
 
         BowState = BowState.IDLE;
     }

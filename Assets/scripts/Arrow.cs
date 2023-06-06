@@ -12,7 +12,7 @@ public class Arrow : MonoBehaviour {
 
     private Vector3 scale;
 
-    private const float ARROWSPEED = 1500.0f;
+    private const float ARROWSPEED = 2000.0f;
 
     public ArrowState ArrowState { get; private set; } = ArrowState.NONE;
 
@@ -76,6 +76,9 @@ public class Arrow : MonoBehaviour {
         transform.parent = null;
 
         Vector3 forceVector = aimTarget.position - bowString.position;
+
+        Debug.Log("ARROW DEBUG: " + forceVector + " = " + aimTarget.position + " - " + bowString.position);
+
         rb.AddForce(forceVector * ARROWSPEED);
     }
 

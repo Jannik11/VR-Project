@@ -5346,6 +5346,7 @@ MonoBehaviour:
   score: {fileID: 1741990973}
   livesGui: {fileID: 1904743407}
   levelGenerator: {fileID: 112953095}
+  immuneTime: 2
 --- !u!1 &1336432771
 GameObject:
   m_ObjectHideFlags: 0
@@ -6920,7 +6921,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 183
+    m_Bits: 191
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

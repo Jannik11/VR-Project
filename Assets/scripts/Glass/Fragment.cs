@@ -16,7 +16,5 @@ public class Fragment : MonoBehaviour
             bg.RegisterHit(hitPoint);
 
         }
-
-
     }
 }

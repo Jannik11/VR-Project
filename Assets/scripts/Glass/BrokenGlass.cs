@@ -45,6 +45,11 @@ public class BrokenGlass : MonoBehaviour {
 
             fragment.GetComponent<MeshCollider>().enabled = true;
 
+            //Die losen Fragmente werden nicht an das Movement-Skript geparented
+            //TODO Fragmente unterordnen
+            fragment.parent = fragment.parent.parent.parent;
+            fragment.gameObject.layer = LayerMask.NameToLayer("Fragment");
+
             Rigidbody rb = fragment.GetComponent<Rigidbody>();
             rb.isKinematic = false;
             rb.detectCollisions = true;

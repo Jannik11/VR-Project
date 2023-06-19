@@ -34,7 +34,7 @@ public class Split3by2 : HitZoneSplit {
 
             Vector3 fragCenter = fragment.GetComponent<MeshRenderer>().bounds.center;
 
-            if(fragCenter.y > center.y) {
+            if (fragCenter.y > center.y) {
                 if (fragCenter.x > rightBorderX) {
                     zones[2].Add(fragment);
                 }
@@ -44,7 +44,8 @@ public class Split3by2 : HitZoneSplit {
                 else {
                     zones[0].Add(fragment);
                 }
-            } else {
+            }
+            else {
                 if (fragCenter.x > rightBorderX) {
                     zones[5].Add(fragment);
                 }
@@ -55,7 +56,6 @@ public class Split3by2 : HitZoneSplit {
                     zones[3].Add(fragment);
                 }
             }
-
         }
     }
 
@@ -63,59 +63,108 @@ public class Split3by2 : HitZoneSplit {
         Vector3 center = transform.position;
         List<Transform> someList = new List<Transform>();
 
-        if (hitPoint.y > center.y) {
+        switch (attachmentType) {
 
-            if (hitPoint.x > rightBorderX) {
-                hitZones[2] = true;
-                someList.AddRange(zones[2]);
+            case AttachmentType.VERTICAL:
+                if (hitPoint.y > center.y) {
 
-                if(hitZones[0]) {
-                    someList.AddRange(zones[1]);
-                    someList.AddRange(zones[4]);
+                    if (hitPoint.x > rightBorderX) {
+                        hitZones[2] = true;
+                        someList.AddRange(zones[2]);
+
+                        if (hitZones[0]) {
+                            someList.AddRange(zones[1]);
+                            someList.AddRange(zones[4]);
+                        }
+
+                    }
+                    else if (hitPoint.x > leftBorderX) {
+                        hitZones[1] = true;
+                        someList.AddRange(zones[1]);
+                        someList.AddRange(zones[4]);
+                    }
+                    else {
+                        hitZones[0] = true;
+                        someList.AddRange(zones[0]);
+
+                        if (hitZones[2]) {
+                            someList.AddRange(zones[1]);
+                            someList.AddRange(zones[4]);
+                        }
+                    }
                 }
+                else {
 
-            }
-            else if (hitPoint.x > leftBorderX) {
-                hitZones[1] = true;
-                someList.AddRange(zones[1]);
-                someList.AddRange(zones[4]);
-            }
-            else {
-                hitZones[0] = true;
-                someList.AddRange(zones[0]);
+                    if (hitPoint.x > rightBorderX) {
+                        hitZones[5] = true;
+                        someList.AddRange(zones[5]);
 
-                if (hitZones[2]) {
-                    someList.AddRange(zones[1]);
-                    someList.AddRange(zones[4]);
+                        if (hitZones[3]) {
+                            someList.AddRange(zones[1]);
+                            someList.AddRange(zones[4]);
+                        }
+
+                    }
+                    else if (hitPoint.x > leftBorderX) {
+                        hitZones[4] = true;
+                        someList.AddRange(zones[4]);
+                        someList.AddRange(zones[1]);
+                    }
+                    else {
+                        hitZones[3] = true;
+                        someList.AddRange(zones[3]);
+
+                        if (hitZones[5]) {
+                            someList.AddRange(zones[1]);
+                            someList.AddRange(zones[4]);
+                        }
+                    }
                 }
-            }
-        }
-        else {
+                break;
+            case AttachmentType.BOTTOM:
+                if (hitPoint.y > center.y) {
 
-            if (hitPoint.x > rightBorderX) {
-                hitZones[5] = true;
-                someList.AddRange(zones[5]);
+                    if (hitPoint.x > rightBorderX) {
+                        hitZones[2] = true;
+                        someList.AddRange(zones[2]);
 
-                if (hitZones[3]) {
-                    someList.AddRange(zones[1]);
-                    someList.AddRange(zones[4]);
+                    }
+                    else if (hitPoint.x > leftBorderX) {
+                        hitZones[1] = true;
+                        someList.AddRange(zones[1]); 
+                        someList.AddRange(zones[4]);
+                    }
+                    else {
+                        hitZones[0] = true;
+                        someList.AddRange(zones[0]);
+                    }
                 }
+                else {
 
-            }
-            else if (hitPoint.x > leftBorderX) {
-                hitZones[4] = true;
-                someList.AddRange(zones[4]);
-                someList.AddRange(zones[1]);
-            }
-            else {
-                hitZones[3] = true;
-                someList.AddRange(zones[3]);
+                    if (hitPoint.x > rightBorderX) {
+                        hitZones[5] = true;
+                        someList.AddRange(zones[5]);
 
-                if (hitZones[5]) {
-                    someList.AddRange(zones[1]);
-                    someList.AddRange(zones[4]);
+                        if (hitZones[1]) {
+                            someList.AddRange(zones[2]);
+                        }
+
+                    }
+                    else if (hitPoint.x > leftBorderX) {
+                        hitZones[4] = true;
+                        someList.AddRange(zones[4]);
+                        someList.AddRange(zones[1]);
+                    }
+                    else {
+                        hitZones[3] = true;
+                        someList.AddRange(zones[3]);
+
+                        if (hitZones[1]) {
+                            someList.AddRange(zones[0]);
+                        }
+                    }
                 }
-            }
+                break;
         }
 
         return someList;

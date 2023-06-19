@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField] int startLives;
     [SerializeField] HighscoreHandler highscoreHandler;
     [SerializeField] TextMeshProUGUI score;
-    [SerializeField] LivesGui livesGui;
+    [SerializeField] LivesGui2 livesGui;
     [SerializeField] LevelGenerator levelGenerator;
     [SerializeField] float immuneTime;
 
@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour {
 
         float endScore = highscoreHandler.EndGame();
         score.text = endScore.ToString();
-        livesGui.EndGame();
+        //livesGui.EndGame();
         levelGenerator.ResetLevel();
         currLives = startLives;
     }

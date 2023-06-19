@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Level_01
   m_EditorClassIdentifier: 
   level:
+  - {fileID: 609943741541446242, guid: db5abd715877fad44b1790007672e209, type: 3}
   - {fileID: 609943741541446242, guid: 53e0bf035b74573428569228de7c4db2, type: 3}
-  - {fileID: 609943741541446242, guid: 0ac5c04cb4a6d154499096fd306862e1, type: 3}
+  - {fileID: 609943741541446242, guid: 5a7471960317f2d41a6c1eb02c98851b, type: 3}
+  - {fileID: 609943741541446242, guid: 8e40cd0133e0e6749a1b02308e54b13f, type: 3}
   levelSeperator: {fileID: 2538826553959620325, guid: ae269196724bcac47921e61e21f48502, type: 3}

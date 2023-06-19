@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObstacleMovementLinkedHorizontal : MonoBehaviour
+public class ObstacleMovementLinkedHorizontal : MovementParent
 {
     [SerializeField] float leftMaxDistance;
     [SerializeField] float rightMaxDistance;
@@ -17,11 +17,9 @@ public class ObstacleMovementLinkedHorizontal : MonoBehaviour
     private float leftTargetX = 0.0f;
     private float rightTargetX = 0.0f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    public override void StartScript() {
         movementAlternater = Random.Range(0, 2) == 0;
-        float spawnMiddlePoint = Random.Range(leftMaxDistance + distanceBetweenTargets / 2.0f, 
+        float spawnMiddlePoint = Random.Range(leftMaxDistance + distanceBetweenTargets / 2.0f,
             rightMaxDistance - distanceBetweenTargets / 2.0f);
 
         leftTargetX = spawnMiddlePoint - distanceBetweenTargets / 2.0f;
@@ -31,27 +29,23 @@ public class ObstacleMovementLinkedHorizontal : MonoBehaviour
         rightTarget.position = new Vector3(rightTargetX, rightTarget.position.y, rightTarget.position.z);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    public override void UpdateMovement() {
         float movement = (movementAlternater ? speed : -speed) * Time.deltaTime;
 
-        if(leftTarget != null)
-        {
+        if (leftTarget != null) {
             leftTarget.Translate(new Vector3(movement, 0, 0));
         }
-        
-        if(rightTarget != null)
-        {
+
+        if (rightTarget != null) {
             rightTarget.Translate(new Vector3(movement, 0, 0));
         }
 
         leftTargetX += movement;
         rightTargetX += movement;
 
-        if ((movementAlternater && rightTargetX > rightMaxDistance) || (!movementAlternater && leftTargetX < leftMaxDistance))
-        {
+        if ((movementAlternater && rightTargetX > rightMaxDistance) || (!movementAlternater && leftTargetX < leftMaxDistance)) {
             movementAlternater = !movementAlternater;
         }
     }
+    
 }

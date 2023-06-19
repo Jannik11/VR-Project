@@ -244,6 +244,7 @@ public static class Fragmenter
             fragment.transform.localPosition = Vector3.zero;
             fragment.transform.localRotation = Quaternion.identity;
             fragment.transform.localScale = sourceObject.transform.localScale;
+            fragment.layer = LayerMask.NameToLayer("Fragment");
 
             meshes[k].name = System.Guid.NewGuid().ToString();
 

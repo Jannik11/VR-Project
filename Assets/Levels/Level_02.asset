@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: Level_02
   m_EditorClassIdentifier: 
   level:
-  - {fileID: 609943741541446242, guid: aeb6a33e59222aa4f8e66ac314551932, type: 3}
-  - {fileID: 8404951327839224600, guid: 67086ad4d182e8f4b91dd3ad988fc8de, type: 3}
-  - {fileID: 6668633688379262312, guid: 40096b2967af08c49b141a91f0d95f02, type: 3}
+  - {fileID: 609943741541446242, guid: bd9da997e4d65de4d93cd82a7fd32ed8, type: 3}
+  - {fileID: 609943741541446242, guid: 945f5a03c18966042ae5ea91a812d03e, type: 3}
+  - {fileID: 8404951327839224600, guid: 26dd522c536b5ae4882cea47cf14e761, type: 3}
+  - {fileID: 609943741541446242, guid: 56df8098b7dd2aa45ac53ce8de7e1aa1, type: 3}
+  - {fileID: 181719441551943701, guid: ed62752960ec9b84f9c10a3f861de945, type: 3}
+  - {fileID: 181719441551943701, guid: e33452767dbe79644aee2cee28c43219, type: 3}
+  - {fileID: 181719441551943701, guid: b309de02f87fcc641a886c1cceedeacc, type: 3}
   levelSeperator: {fileID: 2538826553959620325, guid: ae269196724bcac47921e61e21f48502, type: 3}

@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour {
 
     private int currLives;
 
-    private bool paused = false;
+    public bool Paused { private set; get; } = false;
     private bool activeGame = false;
 
     private float currImmuneTime = 0.0f;
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour {
 
     private void BowReleased() {
         if (activeGame) {
-            paused = true;
+            Paused = true;
             levelGenerator.PauseGame();
         }
     }
@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour {
         livesGui.UpdateLives(currLives);
         livesGui.StartGame();
 
-        Debug.Log("bin ich pausiert: " + paused);
+        Debug.Log("bin ich pausiert: " + Paused);
         if (activeGame) {
             Debug.Log("resume game");
             levelGenerator.ResumeGame();
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour {
             activeGame = true;
             levelGenerator.StartGame();
         }
-        paused = false;
+        Paused = false;
 
     }
     void EndGame() {
@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if(!paused && activeGame) { 
+        if(!Paused && activeGame) { 
             score.text = highscoreHandler.GetScore().ToString();
         }
 

@@ -15,6 +15,8 @@ public class Bow : MonoBehaviour {
 
     [SerializeField] private Transform forceTarget;
 
+    [SerializeField] private GameManager gameManager;
+
     private LineRenderer lineRenderer;
 
     private float midDefaultOffset;
@@ -60,7 +62,10 @@ public class Bow : MonoBehaviour {
     private void ReleaseObject(VG_HandStatus arg0) {
         if (arg0.m_selectedObject.CompareTag("String")) {
 
-            if (BowState == BowState.AIMING && Hands.instance.IsStringInAnyHand() && Quiver.instance.CurrentArrow && Quiver.instance.CurrentArrow.ArrowState == ArrowState.INBOW) {
+            if (BowState == BowState.AIMING && Hands.instance.IsStringInAnyHand() 
+                && Quiver.instance.CurrentArrow && Quiver.instance.CurrentArrow.ArrowState == ArrowState.INBOW 
+                && !gameManager.Paused) {
+
                 EventManager.current.TriggerOnArrowShoot();
             }
 

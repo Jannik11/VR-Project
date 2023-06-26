@@ -9,13 +9,21 @@ public class ColorTheme : MonoBehaviour
     [SerializeField] private GameObject[] emittingObjects;
     [SerializeField] private Material[] materials;
 
+    private int materialIdx = 0;
+
     public void Start() {
         EventManager.current.OnLevelSwitch += ChangeColorTheme;
+        EventManager.current.OnGameStart += ResetColorTheme;
     }
 
-    private void ChangeColorTheme(int lvlNr) {
+    private void ResetColorTheme() {
+        materialIdx = 0;
+    }
+
+    private void ChangeColorTheme() {
         foreach(GameObject go in emittingObjects) {
-            go.GetComponent<MeshRenderer>().material = materials[lvlNr];
+            go.GetComponent<MeshRenderer>().material = materials[materialIdx];
         }
+        materialIdx++;
     }
 }

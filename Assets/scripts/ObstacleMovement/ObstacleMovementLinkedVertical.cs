@@ -47,28 +47,4 @@ public class ObstacleMovementLinkedVertical : MovementParent
             movementAlternater = !movementAlternater;
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        float movement = (movementAlternater ? speed : -speed) * Time.deltaTime;
-
-        if(topTarget != null)
-        {
-            topTarget.Translate(new Vector3(0, movement, 0));
-        }
-        
-        if(bottomTarget != null)
-        {
-            bottomTarget.Translate(new Vector3(0, movement, 0));
-        }
-        
-        topTargetY += movement;
-        bottomTargetY += movement;
-
-        if ((movementAlternater && topTargetY > topMaxDistance) || (!movementAlternater && bottomTargetY < bottomMaxDistance))
-        {
-            movementAlternater = !movementAlternater;
-        }
-    }
 }

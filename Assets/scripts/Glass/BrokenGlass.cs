@@ -37,17 +37,20 @@ public class BrokenGlass : MonoBehaviour {
 
 
     public void RegisterHit(Vector3 hitPoint) {
-        List<Transform> someList = hitZoneSplit.RegisterHit(hitPoint, transform);
+        List<Transform> hittenFragments = hitZoneSplit.RegisterHit(hitPoint, transform);
 
-        foreach (Transform fragment in someList) {
+        foreach (Transform fragment in hittenFragments) {
 
             Vector3 fragCenter = fragment.GetComponent<MeshRenderer>().bounds.center;
 
-            fragment.GetComponent<MeshCollider>().enabled = true;
+            fragment.GetComponent<MeshCollider>().enabled = false;
 
             //Die losen Fragmente werden nicht an das Movement-Skript geparented
             //TODO Fragmente unterordnen
-            fragment.parent = fragment.parent.parent.parent;
+
+            //fragment.parent = fragment.parent.parent.parent;
+            fragment.parent = null;
+
             fragment.gameObject.layer = LayerMask.NameToLayer("Fragment");
 
             Rigidbody rb = fragment.GetComponent<Rigidbody>();

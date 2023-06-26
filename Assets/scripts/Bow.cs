@@ -62,16 +62,20 @@ public class Bow : MonoBehaviour {
     private void ReleaseObject(VG_HandStatus arg0) {
         if (arg0.m_selectedObject.CompareTag("String")) {
 
-            if (BowState == BowState.AIMING && Hands.instance.IsStringInAnyHand() 
-                && Quiver.instance.CurrentArrow && Quiver.instance.CurrentArrow.ArrowState == ArrowState.INBOW 
-                && !gameManager.Paused) {
+            Debug.Log("BUG PAUSE BOGEN HÄ?!: " + gameManager.Paused);
 
-                EventManager.current.TriggerOnArrowShoot();
+            if(!gameManager.Paused) {
+                if (BowState == BowState.AIMING && Hands.instance.IsStringInAnyHand() 
+                    && Quiver.instance.CurrentArrow && Quiver.instance.CurrentArrow.ArrowState == ArrowState.INBOW) { 
+
+                    EventManager.current.TriggerOnArrowShoot();
+                }
+                BowState = BowState.IDLE;
             }
 
             EventManager.current.TriggerOnStringRelease();
             stringGrabbed = false;
-            BowState = BowState.IDLE;
+            
         } else if (arg0.m_selectedObject.CompareTag("Bow")) {
             EventManager.current.TriggerOnBowRelease();
         }
@@ -97,15 +101,12 @@ public class Bow : MonoBehaviour {
     }
 
     private void NockArrow() {
-        Debug.Log("ArrowNock: Bow");
 
         BowState = BowState.AIMING;
     }
 
     private void ShootArrow() {
-        Debug.Log("Arrowshoot: Bow");
 
-        Debug.Log("ARROW DEBUG: MID " + mid.position);
 
         BowState = BowState.IDLE;
     }

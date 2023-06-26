@@ -150,9 +150,9 @@ public class EventManager : MonoBehaviour
 
     #region Level
 
-    public event Action<int> OnLevelSwitch;
-    public void TriggerOnLevelSwitch(int lvlNr) {
-            OnLevelSwitch?.Invoke(lvlNr);
+    public event Action OnLevelSwitch;
+    public void TriggerOnLevelSwitch() {
+            OnLevelSwitch?.Invoke();
     }
 
     #endregion

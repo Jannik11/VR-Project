@@ -30,6 +30,7 @@ public class Gate : MonoBehaviour
         {
             targetHit = true;
             meshRenderer.material.color = activationColor;
+            EventManager.current.TriggerOnLevelSwitch();
         }
     }
 

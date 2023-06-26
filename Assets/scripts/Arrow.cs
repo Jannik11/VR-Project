@@ -77,7 +77,6 @@ public class Arrow : MonoBehaviour {
 
         Vector3 forceVector = aimTarget.position - bowString.position;
 
-        Debug.Log("ARROW DEBUG: " + forceVector + " = " + aimTarget.position + " - " + bowString.position);
 
         rb.AddForce(forceVector * ARROWSPEED);
     }

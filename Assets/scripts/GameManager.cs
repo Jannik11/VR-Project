@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField] LivesGui2 livesGui;
     [SerializeField] LevelGenerator levelGenerator;
     [SerializeField] float immuneTime;
-
+    [SerializeField] GameObject startInstruction;
     private int currLives;
 
     public bool Paused { private set; get; } = false;
@@ -41,10 +41,8 @@ public class GameManager : MonoBehaviour {
     }
 
     void BowGrabbed(Side ignored) {
+        startInstruction.SetActive(false);
         highscoreHandler.ResumeTimer();
-        livesGui.UpdateLives(currLives);
-        livesGui.StartGame();
-
         Debug.Log("bin ich pausiert: " + Paused);
         if (activeGame) {
             Debug.Log("resume game");
@@ -53,6 +51,7 @@ public class GameManager : MonoBehaviour {
             Debug.Log("neustart");
             activeGame = true;
             levelGenerator.StartGame();
+            livesGui.StartGame();
         }
         Paused = false;
 
@@ -88,7 +87,7 @@ public class GameManager : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if(!Paused && activeGame) { 
-            score.text = highscoreHandler.GetScore().ToString();
+            //score.text = highscoreHandler.GetScore().ToString();
         }
 
         currImmuneTime -= Time.deltaTime;

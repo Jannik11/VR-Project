@@ -7,13 +7,20 @@ public class Fragment : MonoBehaviour
     private void OnCollisionEnter(Collision collision) {
 
         if(collision.collider.CompareTag("Arrow")){
-
             Transform parent = transform.parent;
-            BrokenGlass bg = parent.GetComponent<BrokenGlass>();
+            Debug.Log("Parent von Fragment " + parent);
 
-            Vector3 hitPoint = collision.GetContact(0).point;
+            if(parent != null) {
+                BrokenGlass bg = parent.GetComponent<BrokenGlass>();
 
-            bg.RegisterHit(hitPoint);
+                if(bg != null) {
+                    Debug.Log("Broken glass: " + bg);
+                    Vector3 hitPoint = collision.GetContact(0).point;
+                    bg.RegisterHit(hitPoint);
+                }
+
+            }
+
 
         }
     }

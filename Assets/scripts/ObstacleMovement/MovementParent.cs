@@ -19,7 +19,6 @@ public class MovementParent : MonoBehaviour
     }
 
     public void BowGrabbed(Side obj) {
-        Debug.Log("DEBUG: JA ICH MACHE HIER WAS");
         running = true;
     }
 
@@ -34,7 +33,6 @@ public class MovementParent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("DEBUG::: " + running);
         if (running) UpdateMovement();
     }
 }

@@ -13,6 +13,7 @@ TagManager:
   - Glass
   - Bow
   - Hitbox
+  - Gate
   layers:
   - Default
   - TransparentFX

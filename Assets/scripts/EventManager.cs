@@ -129,11 +129,17 @@ public class EventManager : MonoBehaviour
     }   
     public event Action OnGamePause;
     public void TriggerOnGamePause() {
-            OnGamePause?.Invoke();
+        if (OnGamePause != null)
+        {
+            OnGamePause();
+        }
     }  
     public event Action OnPlayerHit;
     public void TriggerOnPlayerHit() {
-        OnPlayerHit?.Invoke();
+        if (OnPlayerHit != null)
+        {
+            OnPlayerHit();
+        }
     }
 
     public event Action OnPlayerGetLifepoint;
@@ -145,15 +151,6 @@ public class EventManager : MonoBehaviour
         }
     }
 
-
-    #endregion
-
-    #region Level
-
-    public event Action<int> OnLevelSwitch;
-    public void TriggerOnLevelSwitch(int lvlNr) {
-            OnLevelSwitch?.Invoke(lvlNr);
-    }
 
     #endregion
 }

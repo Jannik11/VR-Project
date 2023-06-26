@@ -62,7 +62,6 @@ public class LevelGenerator : MonoBehaviour {
         } else {
             currElementsInLvl++;
             spawnedTargets.Add(Instantiate<Transform>(levels[currLevel].GetTarget(), new Vector3(0, 0, chunkSize * (i + 2)), Quaternion.identity));
-            
         }
     }
 

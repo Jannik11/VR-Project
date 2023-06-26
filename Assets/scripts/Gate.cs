@@ -9,17 +9,27 @@ public class Gate : MonoBehaviour
     public Transform up;
     public Transform down;
 
+    public Color activationColor;
+
     public float speed = 5.0f;
     private bool targetHit = false;
 
     private float distanceTraveled = 0.0f;
     private float maxDistanceTraveled = 6.0f;
 
+    private Renderer meshRenderer;
+
+    private void Start()
+    {
+        meshRenderer = GetComponent<Renderer>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Arrow"))
         {
             targetHit = true;
+            meshRenderer.material.color = activationColor;
         }
     }
 

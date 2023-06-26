@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class ObstacleMovementRotateUp : MonoBehaviour
-{
+public class ObstacleMovementRotateUp : MovementParent {
     [SerializeField] float speed;
     [SerializeField] float triggerDistance;
     [SerializeField] float playerPosZ = 0.0f;
@@ -18,6 +17,17 @@ public class ObstacleMovementRotateUp : MonoBehaviour
     Quaternion finalPosition;
     Quaternion originalPosition;
 
+    public override void UpdateMovement() {
+        if (!wasTriggered && Mathf.Abs(transform.position.z - playerPosZ) < triggerDistance) {
+            float movement = speed * Time.deltaTime;
+            transform.RotateAround(finalTransform.position, new Vector3(1, 0, 0), -movement);
+
+            angle += movement;
+
+            wasTriggered = angle > 90.0f;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,19 +36,5 @@ public class ObstacleMovementRotateUp : MonoBehaviour
 
         originalPosition = transform.rotation;
         finalPosition = finalTransform.rotation;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(!wasTriggered && Mathf.Abs(transform.position.z - playerPosZ) < triggerDistance)
-        {
-            float movement = speed * Time.deltaTime;
-            transform.RotateAround(finalTransform.position, new Vector3(1, 0, 0), -movement);
-
-            angle += movement;
-
-            wasTriggered = angle > 90.0f;
-        }
     }
 }

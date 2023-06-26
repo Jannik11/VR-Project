@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour {
 
         EventManager.current.OnPlayerDeath += EndGame;
         EventManager.current.OnPlayerHit += PlayerHit;
+        EventManager.current.OnPlayerGetLifepoint += PlayerGetLifepoint;
         currLives = startLives;
 
         Debug.Log("CURRLIVES: " + currLives);
@@ -73,6 +74,14 @@ public class GameManager : MonoBehaviour {
             if (currLives <= 0) {
                 EventManager.current.TriggerOnPlayerDeath();
             }
+        }
+    }
+
+    private void PlayerGetLifepoint()
+    {
+        if(currLives < startLives)
+        {
+            currLives++;
         }
     }
 

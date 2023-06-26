@@ -142,6 +142,15 @@ public class EventManager : MonoBehaviour
         }
     }
 
+    public event Action OnPlayerGetLifepoint;
+    public void TriggerOnPlayerGetLifepoint()
+    {
+        if(OnPlayerGetLifepoint != null)
+        {
+            OnPlayerGetLifepoint();
+        }
+    }
+
 
     #endregion
 }

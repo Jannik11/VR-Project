@@ -14,9 +14,6 @@ public class ObstacleMovementRotateUp : MovementParent {
     float angle = 0.0f;
     bool wasTriggered = false;
 
-    Quaternion finalPosition;
-    Quaternion originalPosition;
-
     public override void UpdateMovement() {
         if (!wasTriggered && Mathf.Abs(transform.position.z - playerPosZ) < triggerDistance) {
             float movement = speed * Time.deltaTime;
@@ -28,13 +25,9 @@ public class ObstacleMovementRotateUp : MovementParent {
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public override void StartScript()
     {
         meshRender = GetComponent<MeshRenderer>();
         Vector3 translate = new Vector3(0, -meshRender.bounds.extents.y, -meshRender.bounds.extents.z);
-
-        originalPosition = transform.rotation;
-        finalPosition = finalTransform.rotation;
     }
 }

@@ -288,7 +288,7 @@ Transform:
   m_GameObject: {fileID: 321105873327727471}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 8}
-  m_LocalScale: {x: 3, y: 12.8, z: 0.29999998}
+  m_LocalScale: {x: 3, y: 11.5, z: 0.29999998}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 181719441551943701}
@@ -2285,7 +2285,7 @@ Transform:
   m_GameObject: {fileID: 6593868807663856861}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -8}
-  m_LocalScale: {x: 3, y: 12.8, z: 0.29999998}
+  m_LocalScale: {x: 3, y: 11.5, z: 0.29999998}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 181719441551943701}
@@ -2407,7 +2407,7 @@ MonoBehaviour:
     textureOffset: {x: 0, y: 0}
   currentRefractureCount: 0
   hitZoneType: 1
-  attachmentType: 4
+  attachmentType: 2
 --- !u!1 &6627014951395861534
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,15 +9,15 @@ public class Split3by2 : HitZoneSplit {
 
     public Split3by2(AttachmentType attachmentType) : base(attachmentType) { }
 
-    public override void Split(Transform fragmentParent, Transform original) {
+    public override void Split(GameObject fragmentParent, GameObject original) {
 
-        zones = new List<Transform>[] {
-            new List<Transform>(),
-            new List<Transform>(),
-            new List<Transform>(),
-            new List<Transform>(),
-            new List<Transform>(),
-            new List<Transform>()};
+        zones = new List<GameObject>[] {
+            new List<GameObject>(),
+            new List<GameObject>(),
+            new List<GameObject>(),
+            new List<GameObject>(),
+            new List<GameObject>(),
+            new List<GameObject>()};
 
         hitZones = new bool[] { false, false, false, false, false, false };
 
@@ -28,9 +28,11 @@ public class Split3by2 : HitZoneSplit {
         rightBorderX = mr.bounds.max.x - sectionHeightX;
         leftBorderX = mr.bounds.min.x + sectionHeightX;
 
-        Vector3 center = fragmentParent.position;
+        Vector3 center = fragmentParent.transform.position;
 
-        foreach (Transform fragment in fragmentParent) {
+        foreach (Transform fragmentChild in fragmentParent.transform) {
+
+            GameObject fragment = fragmentChild.gameObject;
 
             Vector3 fragCenter = fragment.GetComponent<MeshRenderer>().bounds.center;
 
@@ -59,9 +61,9 @@ public class Split3by2 : HitZoneSplit {
         }
     }
 
-    public override List<Transform> RegisterHit(Vector3 hitPoint, Transform transform) {
-        Vector3 center = transform.position;
-        List<Transform> someList = new List<Transform>();
+    public override List<GameObject> RegisterHit(Vector3 hitPoint, GameObject glass) {
+        Vector3 center = glass.transform.position;
+        List<GameObject> someList = new List<GameObject>();
 
         switch (attachmentType) {
 
@@ -73,6 +75,8 @@ public class Split3by2 : HitZoneSplit {
                         someList.AddRange(zones[2]);
 
                         if (hitZones[0]) {
+                            hitZones[1] = true;
+                            hitZones[4] = true;
                             someList.AddRange(zones[1]);
                             someList.AddRange(zones[4]);
                         }
@@ -80,6 +84,7 @@ public class Split3by2 : HitZoneSplit {
                     }
                     else if (hitPoint.x > leftBorderX) {
                         hitZones[1] = true;
+                        hitZones[4] = true;
                         someList.AddRange(zones[1]);
                         someList.AddRange(zones[4]);
                     }
@@ -88,6 +93,8 @@ public class Split3by2 : HitZoneSplit {
                         someList.AddRange(zones[0]);
 
                         if (hitZones[2]) {
+                            hitZones[1] = true;
+                            hitZones[4] = true;
                             someList.AddRange(zones[1]);
                             someList.AddRange(zones[4]);
                         }
@@ -100,6 +107,8 @@ public class Split3by2 : HitZoneSplit {
                         someList.AddRange(zones[5]);
 
                         if (hitZones[3]) {
+                            hitZones[1] = true;
+                            hitZones[4] = true;
                             someList.AddRange(zones[1]);
                             someList.AddRange(zones[4]);
                         }
@@ -107,6 +116,7 @@ public class Split3by2 : HitZoneSplit {
                     }
                     else if (hitPoint.x > leftBorderX) {
                         hitZones[4] = true;
+                        hitZones[1] = true;
                         someList.AddRange(zones[4]);
                         someList.AddRange(zones[1]);
                     }
@@ -115,6 +125,8 @@ public class Split3by2 : HitZoneSplit {
                         someList.AddRange(zones[3]);
 
                         if (hitZones[5]) {
+                            hitZones[1] = true;
+                            hitZones[4] = true;
                             someList.AddRange(zones[1]);
                             someList.AddRange(zones[4]);
                         }
@@ -131,8 +143,19 @@ public class Split3by2 : HitZoneSplit {
                     }
                     else if (hitPoint.x > leftBorderX) {
                         hitZones[1] = true;
+                        hitZones[4] = true;
                         someList.AddRange(zones[1]); 
                         someList.AddRange(zones[4]);
+
+                        if(hitZones[3]) {
+                            hitZones[0] = true;
+                            someList.AddRange(zones[0]);                           
+                        }
+
+                        if (hitZones[5]) {
+                            hitZones[2] = true;
+                            someList.AddRange(zones[2]);
+                        }
                     }
                     else {
                         hitZones[0] = true;
@@ -146,20 +169,33 @@ public class Split3by2 : HitZoneSplit {
                         someList.AddRange(zones[5]);
 
                         if (hitZones[1]) {
+                            hitZones[2] = true;
                             someList.AddRange(zones[2]);
                         }
 
                     }
                     else if (hitPoint.x > leftBorderX) {
                         hitZones[4] = true;
+                        hitZones[1] = true;
                         someList.AddRange(zones[4]);
                         someList.AddRange(zones[1]);
+
+                        if (hitZones[3]) {
+                            hitZones[0] = true;
+                            someList.AddRange(zones[0]);
+                        }
+
+                        if (hitZones[5]) {
+                            hitZones[2] = true;
+                            someList.AddRange(zones[2]);
+                        }
                     }
                     else {
                         hitZones[3] = true;
                         someList.AddRange(zones[3]);
 
                         if (hitZones[1]) {
+                            hitZones[0] = true;
                             someList.AddRange(zones[0]);
                         }
                     }

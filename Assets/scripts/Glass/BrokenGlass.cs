@@ -5,13 +5,13 @@ using UnityEngine;
 public class BrokenGlass : MonoBehaviour {
 
     private HitZoneSplit hitZoneSplit;
-    private Transform originalGlass;
+    private GameObject originalGlass;
 
     // Start is called before the first frame update
     public void Start() {
     }
 
-    public void Init(HitZoneType hitZoneType, AttachmentType attachmentType, Transform originalGlass, Vector3 hitPoint) {
+    public void Init(HitZoneType hitZoneType, AttachmentType attachmentType, GameObject originalGlass, Vector3 hitPoint) {
 
         this.originalGlass = originalGlass;
 
@@ -31,35 +31,40 @@ public class BrokenGlass : MonoBehaviour {
                 break;
         }
 
-        hitZoneSplit.Split(transform, originalGlass);
+        hitZoneSplit.Split(gameObject, originalGlass);
         RegisterHit(hitPoint);
     }
 
 
     public void RegisterHit(Vector3 hitPoint) {
-        List<Transform> hittenFragments = hitZoneSplit.RegisterHit(hitPoint, transform);
+        List<GameObject> hittenFragments = hitZoneSplit.RegisterHit(hitPoint, gameObject);
 
-        foreach (Transform fragment in hittenFragments) {
+        foreach (GameObject fragment in hittenFragments) {
 
-            Vector3 fragCenter = fragment.GetComponent<MeshRenderer>().bounds.center;
+            if(!fragment.GetComponent<Fragment>().AlreadyHit) {
+                Vector3 fragCenter = fragment.GetComponent<MeshRenderer>().bounds.center;
 
-            fragment.GetComponent<MeshCollider>().enabled = false;
+                fragment.GetComponent<MeshCollider>().enabled = true;
 
-            //Die losen Fragmente werden nicht an das Movement-Skript geparented
-            //TODO Fragmente unterordnen
+                //Die losen Fragmente werden nicht an das Movement-Skript geparented
+                //TODO Fragmente unterordnen
 
-            //fragment.parent = fragment.parent.parent.parent;
-            fragment.parent = null;
+                fragment.transform.parent = fragment.transform.parent.parent.parent;
 
-            fragment.gameObject.layer = LayerMask.NameToLayer("Fragment");
+                fragment.gameObject.layer = LayerMask.NameToLayer("Fragment");
 
-            Rigidbody rb = fragment.GetComponent<Rigidbody>();
-            rb.isKinematic = false;
-            rb.detectCollisions = true;
+                Rigidbody rb = fragment.GetComponent<Rigidbody>();
+                rb.isKinematic = false;
+                rb.detectCollisions = true;
 
-            rb.AddForce(new Vector3(Random.Range(-2.0f, 2.0f), Random.Range(-2.0f, 2.0f), Random.Range(5.0f, 10.0f) * (1.0f - (Vector3.Distance(hitPoint, fragCenter) / 5.0f))));
+                rb.AddForce(new Vector3(Random.Range(-2.0f, 2.0f), Random.Range(-2.0f, 2.0f), Random.Range(5.0f, 10.0f) * (1.0f - (Vector3.Distance(hitPoint, fragCenter) / 5.0f))));
 
-            //Destroy(gameObject, 30.0f);
+                fragment.GetComponent<Fragment>().AlreadyHit = true;
+
+                //Destroy(gameObject, 30.0f);
+            }
+
+
         }
 
     }

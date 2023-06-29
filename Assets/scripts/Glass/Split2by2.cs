@@ -6,19 +6,21 @@ public class Split2by2 : HitZoneSplit {
 
     public Split2by2(AttachmentType attachmentType) : base(attachmentType) { }
 
-    public override void Split(Transform fragmentParent, Transform original) {
+    public override void Split(GameObject fragmentParent, GameObject original) {
 
-        zones = new List<Transform>[] {
-            new List<Transform>(),
-            new List<Transform>(),
-            new List<Transform>(),
-            new List<Transform>()};
+        zones = new List<GameObject>[] {
+            new List<GameObject>(),
+            new List<GameObject>(),
+            new List<GameObject>(),
+            new List<GameObject>()};
 
         hitZones = new bool[] { false, false, false, false };
 
-        Vector3 center = fragmentParent.position;
+        Vector3 center = fragmentParent.transform.position;
 
-        foreach (Transform fragment in fragmentParent) {
+        foreach (Transform fragmentChild in fragmentParent.transform) {
+
+            GameObject fragment = fragmentChild.gameObject;
 
             Vector3 fragCenter = fragment.GetComponent<MeshRenderer>().bounds.center;
 
@@ -42,9 +44,9 @@ public class Split2by2 : HitZoneSplit {
         }
     }
 
-    public override List<Transform> RegisterHit(Vector3 hitPoint, Transform transform) {
-        Vector3 center = transform.position;
-        List<Transform> someList = new List<Transform>();
+    public override List<GameObject> RegisterHit(Vector3 hitPoint, GameObject glass) {
+        Vector3 center = glass.transform.position;
+        List<GameObject> someList = new List<GameObject>();
 
 
         if (hitPoint.x > center.x) {

@@ -9,12 +9,12 @@ public class Split1by3 : HitZoneSplit {
 
     public Split1by3(AttachmentType attachmentType) : base(attachmentType) { }
 
-    public override void Split(Transform fragmentParent, Transform original) {
+    public override void Split(GameObject fragmentParent, GameObject original) {
 
-        zones = new List<Transform>[] {
-            new List<Transform>(),
-            new List<Transform>(),
-            new List<Transform>()};
+        zones = new List<GameObject>[] {
+            new List<GameObject>(),
+            new List<GameObject>(),
+            new List<GameObject>()};
 
         MeshRenderer mr = original.GetComponent<MeshRenderer>();
 
@@ -22,12 +22,14 @@ public class Split1by3 : HitZoneSplit {
             case AttachmentType.TOP:
             case AttachmentType.BOTTOM:
             case AttachmentType.VERTICAL:
-                float sectionHeightY = (mr.bounds.max.y - mr.bounds.min.y) / 3.0f;
+                float sectionHeightY = (mr.bounds.max.y - mr.bounds.min.y) / 5.0f;
 
                 fstBorder = mr.bounds.max.y - sectionHeightY;
                 sndBorder = mr.bounds.min.y + sectionHeightY;
 
-                foreach (Transform fragment in fragmentParent) {
+                foreach (Transform fragmentChild in fragmentParent.transform) {
+
+                    GameObject fragment = fragmentChild.gameObject;
 
                     Vector3 fragCenter = fragment.GetComponent<MeshRenderer>().bounds.center;
 
@@ -46,12 +48,14 @@ public class Split1by3 : HitZoneSplit {
             case AttachmentType.LEFT:
             case AttachmentType.RIGHT:
             case AttachmentType.HORIZONTAL:
-                float sectionHeightX = (mr.bounds.max.x - mr.bounds.min.x) / 3.0f;
+                float sectionHeightX = (mr.bounds.max.x - mr.bounds.min.x) / 5.0f;
 
                 fstBorder = mr.bounds.max.x - sectionHeightX;
                 sndBorder = mr.bounds.min.x + sectionHeightX;
 
-                foreach (Transform fragment in fragmentParent) {
+                foreach (Transform fragmentChild in fragmentParent.transform) {
+
+                    GameObject fragment = fragmentChild.gameObject;
 
                     Vector3 fragCenter = fragment.GetComponent<MeshRenderer>().bounds.center;
 
@@ -71,9 +75,9 @@ public class Split1by3 : HitZoneSplit {
         }
     }
 
-    public override List<Transform> RegisterHit(Vector3 hitPoint, Transform transform) {
-        Vector3 center = transform.position;
-        List<Transform> someList = new List<Transform>();
+    public override List<GameObject> RegisterHit(Vector3 hitPoint, GameObject glass) {
+        Vector3 center = glass.transform.position;
+        List<GameObject> someList = new List<GameObject>();
 
         switch (attachmentType) {
             case AttachmentType.TOP:
@@ -108,14 +112,14 @@ public class Split1by3 : HitZoneSplit {
 
             case AttachmentType.VERTICAL:
                 if (hitPoint.y > fstBorder) {
-                    someList.AddRange(zones[2]);
+                    someList.AddRange(zones[0]);
                     someList.AddRange(zones[1]);
                 }
                 else if (hitPoint.y > sndBorder) {
                     someList.AddRange(zones[1]);
                 }
                 else {
-                    someList.AddRange(zones[0]);
+                    someList.AddRange(zones[2]);
                     someList.AddRange(zones[1]);
                 }
                 break;

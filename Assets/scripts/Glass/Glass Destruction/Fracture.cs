@@ -101,7 +101,7 @@ public class Fracture : MonoBehaviour {
             fragmentRoot.transform.parent = transform;
 
             BrokenGlass bg = fragmentRoot.AddComponent<BrokenGlass>();
-            bg.Init(hitZoneType, attachmentType, transform, hitPoint);
+            bg.Init(hitZoneType, attachmentType, gameObject, hitPoint);
         }
     }
 

@@ -11,6 +11,7 @@ public class LevelGenerator : MonoBehaviour {
 
     [SerializeField] LevelSO[] levels;
 
+    int STARTGAP = 3;
 
     [SerializeField] int lvlSize = 6;
     public int CurrLevel { get; private set; } = 0;
@@ -45,23 +46,25 @@ public class LevelGenerator : MonoBehaviour {
     }
 
     void GenerateLevel() {
-        for (int i = 0; i < chunksToLoad; i++) {
+        for (int i = 0; i < chunksToLoad + STARTGAP; i++) {
             generateTarget(i);
         }
     }
 
     private void generateTarget(int i) {
         bool lastLevel = CurrLevel >= levels.Length - 1;
-        Debug.Log("currElementsInLvl > lvlSize: " + (currElementsInLvl > lvlSize));
-        Debug.Log("lastLevel " + lastLevel);
+
+        Debug.Log(":_:Generate: ");
+
         if (currElementsInLvl > lvlSize && !lastLevel) { //nicht endlosLevel und Level ist voll also Level-Trenner
-            Debug.Log("Hello warum");
             currElementsInLvl = 0;
             CurrLevel++;
-            spawnedTargets.Add(Instantiate<Transform>(levels[CurrLevel].GetSeperator(), new Vector3(0, 0, chunkSize * (i + 2)), Quaternion.identity));
+            spawnedTargets.Add(Instantiate<Transform>(levels[CurrLevel].levelSeperator, new Vector3(0, 0, chunkSize * (i + 2)), Quaternion.identity));
+            Debug.Log(":_:GATE");
         } else {
             currElementsInLvl++;
             spawnedTargets.Add(Instantiate<Transform>(levels[CurrLevel].GetTarget(), new Vector3(0, 0, chunkSize * (i + 2)), Quaternion.identity));
+            Debug.Log(":_:TARGET");
             
         }
     }

@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField] float immuneTime;
     [SerializeField] GameObject startInstruction;
     [SerializeField] GameObject gameOverBanner;
+    [SerializeField] TextMeshProUGUI currentTime;
     private int currLives;
 
     public bool Paused { private set; get; } = false;
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour {
 
     private void BowReleased() {
         if (activeGame) {
+            highscoreHandler.PauseTimer();
             Paused = true;
             levelGenerator.PauseGame();
         }
@@ -89,7 +91,7 @@ public class GameManager : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if(!Paused && activeGame) { 
-            //score.text = highscoreHandler.GetScore().ToString();
+            currentTime.text = Math.Round(highscoreHandler.GetScore(), 2).ToString();
         }
 
         currImmuneTime -= Time.deltaTime;

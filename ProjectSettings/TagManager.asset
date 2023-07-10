@@ -14,6 +14,7 @@ TagManager:
   - Bow
   - Hitbox
   - Gate
+  - Fragment
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - Water
   - UI
   - NoPP
-  - 
+  - Hitbox
   - 
   - 
   - 

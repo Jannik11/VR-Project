@@ -29,6 +29,10 @@ public class BrokenGlass : MonoBehaviour {
 
                 hitZoneSplit = new Split3by2(attachmentType);
                 break;
+            case HitZoneType._3by1:
+
+                hitZoneSplit = new Split3by1(attachmentType);
+                break;
         }
 
         hitZoneSplit.Split(gameObject, originalGlass);
@@ -52,6 +56,7 @@ public class BrokenGlass : MonoBehaviour {
                 fragment.transform.parent = fragment.transform.parent.parent.parent;
 
                 fragment.gameObject.layer = LayerMask.NameToLayer("Fragment");
+                fragment.tag = "Fragment";
 
                 Rigidbody rb = fragment.GetComponent<Rigidbody>();
                 rb.isKinematic = false;

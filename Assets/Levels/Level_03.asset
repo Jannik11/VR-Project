@@ -16,4 +16,6 @@ MonoBehaviour:
   - {fileID: 4493067253593524302, guid: e73bcd7cc2d8d6945ac394bf97ba0462, type: 3}
   - {fileID: 6668633688379262312, guid: f3543a1833642894f993b9a13f255fbe, type: 3}
   - {fileID: 149763188885555287, guid: 276f5949be78ca94c9ed4bb1e25bf5ee, type: 3}
+  - {fileID: 2347857128183746414, guid: 0d3b956d057f4b34e80d03068c8c9a46, type: 3}
+  - {fileID: 2280729974483238736, guid: 1e2ca05f6c7ad0a45b2c910fd1c8ac7c, type: 3}
   levelSeperator: {fileID: 2538826553959620325, guid: ae269196724bcac47921e61e21f48502, type: 3}

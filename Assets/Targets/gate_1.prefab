@@ -303,6 +303,7 @@ GameObject:
   - component: {fileID: 427956718324482510}
   - component: {fileID: 717072725413335502}
   - component: {fileID: 3627154188452474225}
+  - component: {fileID: 240682495052013416}
   m_Layer: 0
   m_Name: Down
   m_TagString: Gate
@@ -388,6 +389,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &240682495052013416
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749472355259605861}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &985485784189961675
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,6 +418,7 @@ GameObject:
   - component: {fileID: 169802667325442231}
   - component: {fileID: 3265162395255213509}
   - component: {fileID: 2937356349621667829}
+  - component: {fileID: 8420593760109681341}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Gate
@@ -505,6 +523,19 @@ MonoBehaviour:
   down: {fileID: 8487681031650994569}
   activationColor: {r: 0.029375792, g: 1, b: 0, a: 0}
   speed: 5
+--- !u!65 &8420593760109681341
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 985485784189961675}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 5.9309454, y: 1.231704, z: 5.896174}
+  m_Center: {x: 0, y: 5.6444306, z: 3.989008}
 --- !u!1 &2549791147412043917
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,6 +645,7 @@ GameObject:
   - component: {fileID: 7606959839191375678}
   - component: {fileID: 7529651888747601561}
   - component: {fileID: 6636358439952036741}
+  - component: {fileID: 5777876369487089903}
   m_Layer: 0
   m_Name: Up
   m_TagString: Gate
@@ -699,6 +731,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &5777876369487089903
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2632381244899113653}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &3309165227832385975
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,6 +856,7 @@ GameObject:
   - component: {fileID: 4692758184668686320}
   - component: {fileID: 2023870284798039889}
   - component: {fileID: 6165329862328389630}
+  - component: {fileID: 8548516091246819716}
   m_Layer: 0
   m_Name: Left
   m_TagString: Gate
@@ -893,6 +942,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &8548516091246819716
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3673026914731845302}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4121545047309641239
 GameObject:
   m_ObjectHideFlags: 0
@@ -1001,7 +1066,7 @@ GameObject:
   - component: {fileID: 2538826553959620325}
   m_Layer: 0
   m_Name: gate_1
-  m_TagString: Untagged
+  m_TagString: Gate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1143,6 +1208,7 @@ GameObject:
   - component: {fileID: 4779980748463720008}
   - component: {fileID: 5629337141393139889}
   - component: {fileID: 1452248256580991058}
+  - component: {fileID: 3788000922185758369}
   m_Layer: 0
   m_Name: Right
   m_TagString: Gate
@@ -1228,6 +1294,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &3788000922185758369
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5296976291961840933}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8566209912933261714
 GameObject:
   m_ObjectHideFlags: 0

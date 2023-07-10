@@ -12,7 +12,7 @@ public class Hitbox : MonoBehaviour
         }
 
         if(other.CompareTag("Gate")) {
-            Destroy(other.gameObject);
+            other.transform.parent.gameObject.SetActive(false);
             EventManager.current.TriggerOnPlayerHit();
             EventManager.current.TriggerOnLevelSwitch();
         }

@@ -9,10 +9,11 @@ public class GameManager : MonoBehaviour {
     [SerializeField] int startLives;
     [SerializeField] HighscoreHandler highscoreHandler;
     [SerializeField] TextMeshProUGUI score;
-    [SerializeField] LivesGui2 livesGui;
+    [SerializeField] LivesGui livesGui;
     [SerializeField] LevelGenerator levelGenerator;
     [SerializeField] float immuneTime;
     [SerializeField] GameObject startInstruction;
+    [SerializeField] GameObject gameOverBanner;
     private int currLives;
 
     public bool Paused { private set; get; } = false;
@@ -49,6 +50,7 @@ public class GameManager : MonoBehaviour {
             levelGenerator.ResumeGame();
         } else {
             Debug.Log("neustart");
+            gameOverBanner.SetActive(false);
             activeGame = true;
             levelGenerator.StartGame();
             livesGui.StartGame();
@@ -61,9 +63,9 @@ public class GameManager : MonoBehaviour {
 
         float endScore = highscoreHandler.EndGame();
         score.text = endScore.ToString();
-        //livesGui.EndGame();
         levelGenerator.ResetLevel();
         currLives = startLives;
+        gameOverBanner.SetActive(true);
     }
     void PlayerHit() {
         if(currImmuneTime <= 0.0f) {

@@ -67,6 +67,8 @@ public class LevelGenerator : MonoBehaviour {
     }
 
     public void ResetLevel() {
+        running = false;
+
         for (int i = 0; i < spawnedTargets.Count; i++) {
             Destroy(spawnedTargets[i].gameObject);
         }
@@ -74,8 +76,7 @@ public class LevelGenerator : MonoBehaviour {
         currElementsInLvl = 0;
         spawnedTargets = new List<Transform>();
         distanceTraveled = 0.0f;
-        actualSpeed = speed;
-        running = false;
+        actualSpeed = speed;   
     }
 
     public void StartGame() {
@@ -104,7 +105,6 @@ public class LevelGenerator : MonoBehaviour {
                 spawnedTargets.RemoveAt(0);
                 distanceTraveled = 0;
                 generateTarget(chunksToLoad - 1);
-                //spawnedTargets.Add(Instantiate<Transform>(targets[UnityEngine.Random.Range(0, targets.Length)], new Vector3(0, 0, chunkSize * (chunksToLoad - 1)), Quaternion.identity));
             }
             foreach (Transform target in spawnedTargets) {
                 target.transform.Translate(new Vector3(0, 0, distance));

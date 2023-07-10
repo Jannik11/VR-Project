@@ -1,24 +1,28 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class LivesGui : MonoBehaviour {
-    [SerializeField] TextMeshProUGUI livesText;
-    [SerializeField] GameObject gameOverGrafik;
+    [SerializeField] GameObject[] goodLives;
+    [SerializeField] GameObject[] badLives;
+    // Start is called before the first frame update
     public void UpdateLives(int lives) {
-        livesText.text = "Du hast noch " + lives + " Leben";
-    }
-
-    public void EndGame() {
-        livesText.text = "Du hast verloren.\n nehme den Bogen erneut auf um neu zu starten.";
-        gameOverGrafik.SetActive(true);
+        for (int i = 0; i < goodLives.Length; i++) {
+            if (i < lives) {
+                goodLives[i].SetActive(true);
+                badLives[i].SetActive(false);
+            }
+            else {
+                goodLives[i].SetActive(false);
+                badLives[i].SetActive(true);
+            }
+        }
     }
 
     public void StartGame() {
-        gameOverGrafik.SetActive(false);
+        for (int i = 0; i < goodLives.Length; i++) {
+            goodLives[i].SetActive(true);
+            badLives[i].SetActive(false);
+        }
     }
-
-    //Hier könnte nun auch das Armband benutzt werden.
 }

@@ -2,13 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Bewegungsskript für horizontale Bewegung zweier verbundener Glasscheiben
+/// </summary>
 public class ObstacleMovementLinkedHorizontal : MovementParent
 {
+    /// <summary>
+    /// Linke und rechte Grenze der Bewegung
+    /// Abstand der zwei Scheiben zueinander
+    /// Geschwindigkeit
+    /// </summary>
     [SerializeField] float leftMaxDistance;
     [SerializeField] float rightMaxDistance;
     [SerializeField] float distanceBetweenTargets;
     [SerializeField] float speed;
 
+    /// <summary>
+    /// Transforms der Glasscheiben
+    /// </summary>
     [SerializeField] Transform leftTarget;
     [SerializeField] Transform rightTarget;
 
@@ -17,6 +28,9 @@ public class ObstacleMovementLinkedHorizontal : MovementParent
     private float leftTargetX = 0.0f;
     private float rightTargetX = 0.0f;
 
+    /// <summary>
+    /// Startposition und Richtung werden zufällig initialisiert
+    /// </summary>
     public override void StartScript() {
         movementAlternater = Random.Range(0, 2) == 0;
         float spawnMiddlePoint = Random.Range(leftMaxDistance + distanceBetweenTargets / 2.0f,
@@ -29,6 +43,9 @@ public class ObstacleMovementLinkedHorizontal : MovementParent
         rightTarget.position = new Vector3(rightTargetX, rightTarget.position.y, rightTarget.position.z);
     }
 
+    /// <summary>
+    /// Glasscheibe wird translatiert
+    /// </summary>
     public override void UpdateMovement() {
         float movement = (movementAlternater ? speed : -speed) * Time.deltaTime;
 

@@ -6484,7 +6484,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSrc: {fileID: 1032600556}
   arrowShootSound: {fileID: 8300000, guid: ac0b1c798fa3316489b768d8ea0cedc4, type: 3}
-  glassDebug: {fileID: 8300000, guid: a87be3115d7b68e4c89bceb7c2bf5697, type: 3}
   glassBreakingSounds:
   - {fileID: 8300000, guid: b57d05aab4f367247bc96d24dad2ae19, type: 3}
   - {fileID: 8300000, guid: f24a2a6bf489a4248be604c85b70abfc, type: 3}

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SimpleTimer : MonoBehaviour {
@@ -7,7 +5,9 @@ public class SimpleTimer : MonoBehaviour {
 
     private bool running = false;
 
-    // Update is called once per frame
+    /// <summary>
+    /// Zählt den Timer hoch, wenn das Spiel nicht pausiert ist
+    /// </summary>
     void Update()
     {
         if (running)
@@ -16,15 +16,27 @@ public class SimpleTimer : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Startet den Timer nachdem das Spiel nach einer Pause
+    /// fortgesetzt wird
+    /// </summary>
     public void ResumeTimer()
     {
         running = true;
     }
+
+    /// <summary>
+    /// Pausiert den Timer
+    /// </summary>
     public void PauseTimer()
     {
         running = false;
     }
 
+    /// <summary>
+    /// Beendet den Timer
+    /// </summary>
+    /// <returns>Gibt die erreichte Zeit zurück</returns>
     public float EndTimer()
     {
         running = false;

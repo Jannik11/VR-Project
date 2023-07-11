@@ -1,8 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Oberklasse für alle Bewegungsskripte
+/// </summary>
 public class MovementParent : MonoBehaviour
 {
     bool running = true;
@@ -14,23 +14,29 @@ public class MovementParent : MonoBehaviour
         StartScript();
     }
 
+    /// <summary>
+    /// Pause-Status wird aktualisiert, wenn der Bogen gegriffen oder losgelassen wurde
+    /// </summary>
     public void BowReleased() {
         running = false;
     }
-
     public void BowGrabbed(Side obj) {
         running = true;
     }
 
+    /// <summary>
+    /// Methoden werden von den erbenden Klassen implementiert
+    /// </summary>
     public virtual void UpdateMovement() {
 
     }
-
     public virtual void StartScript() {
 
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Wenn das Spiel nicht pausiert ist, werden die Bewegungsskripte aufgerufen
+    /// </summary>
     void Update()
     {
         if (running) UpdateMovement();

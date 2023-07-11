@@ -2,7 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Bewegungsskript für sprunghafte, horizontale Bewegung
+/// </summary>
 public class ObstacleMovementRapidHorizontal : MovementParent {
+
+    /// <summary>
+    /// Linke und rechte Grenze
+    /// Geschwindigkeit
+    /// Anzahl der Sprungintervalle
+    /// Zeit zwischen den Sprüngen
+    /// </summary>
     [SerializeField] float left;
     [SerializeField] float right;
     [SerializeField] float speed;
@@ -18,6 +28,9 @@ public class ObstacleMovementRapidHorizontal : MovementParent {
 
     int currInterval = 0;
 
+    /// <summary>
+    /// Translation der Scheiben
+    /// </summary>
     public override void UpdateMovement() {
         if (moving) {
             float movement = (movementAlternater ? speed : -speed) * Time.deltaTime;
@@ -42,6 +55,9 @@ public class ObstacleMovementRapidHorizontal : MovementParent {
         }
     }
 
+    /// <summary>
+    /// Initialisierung der Scheibe
+    /// </summary>
     public override void StartScript() {
         intervalPositions = new float[intervalCount];
 

@@ -61,9 +61,6 @@ public class Bow : MonoBehaviour {
 
     private void ReleaseObject(VG_HandStatus arg0) {
         if (arg0.m_selectedObject.CompareTag("String")) {
-
-            Debug.Log("BUG PAUSE BOGEN HÄ?!: " + gameManager.Paused);
-
             if(!gameManager.Paused) {
                 if (BowState == BowState.AIMING && Hands.instance.IsStringInAnyHand() 
                     && Quiver.instance.CurrentArrow && Quiver.instance.CurrentArrow.ArrowState == ArrowState.INBOW) { 

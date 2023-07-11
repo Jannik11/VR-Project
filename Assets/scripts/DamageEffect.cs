@@ -19,7 +19,7 @@ public class DamageEffect : MonoBehaviour
 
     private void ShowDamageEffect() {
         Color imageColor = image.color;
-        imageColor.a = 0.2f;
+        imageColor.a = 0.3f;
         image.color = imageColor;
         alphaIsZero = false;
     }

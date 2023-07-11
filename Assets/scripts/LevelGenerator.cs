@@ -99,7 +99,12 @@ public class LevelGenerator : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (running) {
-            actualSpeed += speedIncrease * Time.deltaTime;
+            
+            //Geschwindigkeit steigt beim letzten Level
+            if(CurrLevel >= levels.Length - 1) {
+                actualSpeed += speedIncrease * Time.deltaTime;
+            }
+          
             float distance = -actualSpeed * Time.deltaTime;
             distanceTraveled += distance;
 

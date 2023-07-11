@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private void BowReleased() {
+        startInstruction.SetActive(true);
         if (activeGame) {
             highscoreHandler.PauseTimer();
             Paused = true;
@@ -85,6 +86,7 @@ public class GameManager : MonoBehaviour {
         if(currLives < startLives)
         {
             currLives++;
+            livesGui.UpdateLives(currLives);
         }
     }
 

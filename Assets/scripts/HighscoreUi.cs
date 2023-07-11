@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+/// <summary>
+/// Zeigt den Highscore auf der dafür vorgesehenden Fläche an.
+/// </summary>
 public class HighscoreUi : MonoBehaviour {
     [SerializeField] Transform scoresParent;
     [SerializeField] GameObject scorePrefab;
@@ -11,10 +13,12 @@ public class HighscoreUi : MonoBehaviour {
 
     List<GameObject> uiElements = new List<GameObject>();
 
+    /// <summary>
+    /// bekommt alle Scores die angezeigt werden sollen.
+    /// und schreibt sie auf dei Highscoretafel
+    /// </summary>
+    /// <param name="scores">alle Scores die auf der HighscoreTafel angezeigt werden sollen</param>
     public void UpdateUI(List<HighscoreElement> scores) {
-        //while (scoresParent.transform.childCount > 0) {
-        //    GameObject.Destroy(scoresParent.transform.GetChild(0));
-       // }
         for (int i = 0; i < scores.Count; i++) {
             HighscoreElement el = scores[i];
             GameObject inst;

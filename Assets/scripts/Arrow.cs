@@ -53,6 +53,9 @@ public class Arrow : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// legt einen Pfeil der in der Hand des Spielers ist in den Bogen ein
+    /// </summary>
     public void NockArrow() {
 
         EventManager.current.OnArrowNock -= NockArrow;
@@ -62,6 +65,9 @@ public class Arrow : MonoBehaviour {
         transform.SetParent(bowString, true);
     }
 
+    /// <summary>
+    /// schießt einen Pfeil der im Bogen lag ab, indem ihm eine Kraft hinzugefügt wird.
+    /// </summary>
     public void ShootArrow() {
 
         EventManager.current.OnArrowShoot -= ShootArrow;
@@ -81,6 +87,10 @@ public class Arrow : MonoBehaviour {
         rb.AddForce(forceVector * ARROWSPEED);
     }
 
+    /// <summary>
+    /// Wenn der Pfeil ein Ziel trifft wird er zerstört
+    /// </summary>
+    /// <param name="collider"> collider mit dem kollidiert wird</param>
     public void ArrowHit(int id, Collider collider) {
         if (id != this.id || ArrowState != ArrowState.FLYING) {
             return;
@@ -91,6 +101,11 @@ public class Arrow : MonoBehaviour {
         Destroy(gameObject);
     }
 
+    /// <summary>
+    /// hier werden die Kollosionen getriggert. Es wird geprüft um was für ein Objekt es sich handelt mit dem Kollidiert wird. 
+    /// das entsprechende Event wird dann getriggert.
+    /// </summary>
+    /// <param name="collision">die Kollision</param>
     private void OnCollisionEnter(Collision collision) {
         Debug.Log("OnCollisionEnter triggered");
         if (collision.collider.CompareTag("Quiver") || collision.collider.CompareTag("String")) {

@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //Größe der einezelnen Bausteine 5 x 5 x 15
+/// <summary>
+/// Generiert aus den Levels prozedural die einzelnen Level,
+/// indem zufällige Levelobjekte aus den einzelnen Levels gespawnt werden.
+/// </summary>
 public class LevelGenerator : MonoBehaviour {
 
 
@@ -51,24 +55,24 @@ public class LevelGenerator : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Spawned ein Target an Stelle i, heißt chunksize * i hinter dem Startpunkt.
+    /// </summary>
     private void generateTarget(int i) {
         bool lastLevel = CurrLevel >= levels.Length - 1;
-
-        Debug.Log(":_:Generate: ");
-
         if (currElementsInLvl > lvlSize && !lastLevel) { //nicht endlosLevel und Level ist voll also Level-Trenner
             currElementsInLvl = 0;
             CurrLevel++;
             spawnedTargets.Add(Instantiate<Transform>(levels[CurrLevel].levelSeperator, new Vector3(0, 0, chunkSize * (i + 2)), Quaternion.identity));
-            Debug.Log(":_:GATE");
         } else {
             currElementsInLvl++;
             spawnedTargets.Add(Instantiate<Transform>(levels[CurrLevel].GetTarget(), new Vector3(0, 0, chunkSize * (i + 2)), Quaternion.identity));
-            Debug.Log(":_:TARGET");
-            
         }
     }
 
+    /// <summary>
+    /// entfernt alle erstellten Targets wieder, wenn der Spieler verloren hat.
+    /// </summary>
     public void ResetLevel() {
         running = false;
 

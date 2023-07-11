@@ -3,6 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// prüft ob ein erreichter Score hoch genug ist um auf die Highscore Liste zu gelangen.
+/// steuert den Timer.
+/// und Speichert und Lädt in die Highscoredatei.
+/// </summary>
 public class HighscoreHandler : MonoBehaviour {
     [SerializeField] private SimpleTimer timer;
     private List<HighscoreElement> highscoreElements = new List<HighscoreElement>();

@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using VirtualGrasp;
 
+/// <summary>
+/// Die Logic wie der Bogen Funktioniert.
+/// </summary>
 public class Bow : MonoBehaviour {
     public static Bow instance;
 
@@ -59,6 +62,10 @@ public class Bow : MonoBehaviour {
         lineRenderer.SetPositions(positions);
     }
 
+    /// <summary>
+    /// wird aufgerufen wenn die Hände ein Objekt komplett loslassen.
+    /// dann wird geprüft ob es der Bogen war oder die Sehne, und die entsprechenden Events getriggert.
+    /// </summary>
     private void ReleaseObject(VG_HandStatus arg0) {
         if (arg0.m_selectedObject.CompareTag("String")) {
             if(!gameManager.Paused) {
@@ -78,6 +85,10 @@ public class Bow : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// wird aufgerufen wenn die Hände ein Objekt greifen.
+    /// Der Bogen prüft dann, ob es sich um die Sehen oder den Bogen handelt und triggert die entsprechenden Events.
+    /// </summary>
     private void GrabObject(VG_HandStatus arg0) {
 
         if (arg0.m_selectedObject.CompareTag("String")) {
@@ -98,13 +109,10 @@ public class Bow : MonoBehaviour {
     }
 
     private void NockArrow() {
-
         BowState = BowState.AIMING;
     }
 
     private void ShootArrow() {
-
-
         BowState = BowState.IDLE;
     }
 }

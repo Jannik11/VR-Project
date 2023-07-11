@@ -12,10 +12,6 @@ public class EventManager : MonoBehaviour
         current = this;
     }
 
-    private void Update() {
-        //Debug.Log("Bow: " + Bow.instance.BowState + "\t\t\tArrow: " + Quiver.instance.CurrentArrow?.ArrowState + "\t\t\tHands: " + Hands.instance.Left + " " + Hands.instance.Right);
-    }
-
     #region Arrow
     
     public event Action<Side> OnArrowGrab;

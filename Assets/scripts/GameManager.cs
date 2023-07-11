@@ -35,6 +35,9 @@ public class GameManager : MonoBehaviour {
         Debug.Log("CURRLIVES: " + currLives);
     }
 
+    /// <summary>
+    /// Pausiert das Spiel (Timer und den Levelgenerator) wenn nötig.
+    /// </summary>
     private void BowReleased() {
         startInstruction.SetActive(true);
         if (activeGame) {
@@ -44,6 +47,9 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// startet ein neues Spiel oder resumed es.
+    /// </summary>
     void BowGrabbed(Side ignored) {
         startInstruction.SetActive(false);
         highscoreHandler.ResumeTimer();
@@ -61,6 +67,9 @@ public class GameManager : MonoBehaviour {
         Paused = false;
 
     }
+    /// <summary>
+    /// beendet ein Spiel wenn der Spieler verloren hat.
+    /// </summary>
     void EndGame() {
         activeGame = false;
 
@@ -70,6 +79,10 @@ public class GameManager : MonoBehaviour {
         currLives = startLives;
         gameOverBanner.SetActive(true);
     }
+
+    /// <summary>
+    ///  zieht leben ab und checkt ob der Spieler verloren hat.
+    /// </summary>
     void PlayerHit() {
         if(currImmuneTime <= 0.0f) {
             currLives--;
@@ -81,6 +94,9 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// gibt dem Spieler ein Leben zurück, wenn ein entsprechendes Ziel getroffen wurde.
+    /// </summary>
     private void PlayerGetLifepoint()
     {
         if(currLives < startLives)

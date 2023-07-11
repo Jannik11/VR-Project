@@ -4,6 +4,10 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// Script um den Highscore in eine Datei schreiben zu können. Und die schon erstellten Highscores aus der Datei lesen zu können 
+/// </summary>
+
 public static class FileHandler {
 
     public static void SaveToJSON<T> (List<T> toSave, string filename) {

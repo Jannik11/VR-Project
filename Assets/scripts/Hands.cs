@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Speichert ab, was die beiden Hände in der Hand haben.
+/// </summary>
+
 public class Hands : MonoBehaviour {
 
     public static Hands instance;
@@ -23,8 +27,6 @@ public class Hands : MonoBehaviour {
     }
 
     private void GrabArrow(Side side) {
-        Debug.Log("ArrowGrab: Hand");
-
         if (side == Side.LEFT) {
             Left = HandState.ARROW;
         } else if (side == Side.RIGHT) {
@@ -33,8 +35,6 @@ public class Hands : MonoBehaviour {
     }
 
     private void NockArrow() {
-        Debug.Log("ArrowNock: Hand");
-
         if (Left == HandState.ARROW) {
             Left = HandState.NONE;
         }
@@ -44,8 +44,6 @@ public class Hands : MonoBehaviour {
     }
 
     private void GrabString(Side side) {
-        Debug.Log("GrabString: Hand");
-
         if (side == Side.LEFT) {
             Left = HandState.STRING;
         } else if (side == Side.RIGHT) {
@@ -54,8 +52,6 @@ public class Hands : MonoBehaviour {
     }
 
     private void ReleaseString() {
-        Debug.Log("ReleaseString: Hand");
-
         if (Left == HandState.STRING) {
             Left = HandState.NONE;
         }

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Hitbox : MonoBehaviour
 {
+    /// <summary>
+    /// stellt die Hitbox des Spielers da, 
+    /// wenn ein Spieler eine Scheibe oder einen Leveltrenner trifft wird das entsprechende Event ausgelöst.
+    /// </summary>
     private void OnTriggerEnter(Collider other) {
 
         if(other.CompareTag("Glass")) {
